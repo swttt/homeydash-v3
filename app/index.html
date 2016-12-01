@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>HomeyDash</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <!-- endbower -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+</head>
+
+<body ng-controller="MainCtrl" md-swipe-right="sidebarWidth=true" md-swipe-left="sidebarWidth=false">
+
+  <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <!-- Add your site or application content here -->
+  <div layout="row" layout-fill>
+
+    <div class="sidebar md-whiteframe-5dp" ng-class="{'sidebar-width':sidebarWidth}">
+      <center><img src="/images/logo.png" style="padding:5px;" /></center>
+      <md-list flex>
+        <md-list-item class="md-1-line" ng-click="null">
+          <div class="md-list-item-text" layout="column">
+            Woonkamer
+          </div>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item class="md-1-line" ng-click="null">
+          <div class="md-list-item-text" layout="column">
+            Keuken
+          </div>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item class="md-1-line" ng-click="null">
+          <div class="md-list-item-text" layout="column">
+            Sabnzbd
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+
+    <md-content flex layout="row" layout-padding layout-wrap layout-align="start start" md-scroll-y style="background-color:rgba(255, 255, 255, 0);">
+
+      <div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
+        <h2 style="display:inline;color:white;text-transform:uppercase;font-weight:300;">Woonkamer</h2>
+        <md-icon style="color:white;position:absolute;top:0px;right:10px;">settings</md-icon>
+      </div>
+
+      <hd-light hd-type="slider" flex="25" flex-xs="100" flex-xs="100"></hd-light>
+
+      <hd-light hd-type="switch" flex="25" flex-xs="100" flex-xs="100"></hd-light>
+
+
+
+
+    </md-content>
+
+  </div>
+
+
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/directives/hdlight.js"></script>
+  <!-- endbuild -->
+</body>
+
+</html>

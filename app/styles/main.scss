@@ -1,0 +1,50 @@
+// bower:scss
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+  background-color:rgba(255, 255, 255, 0);
+}
+
+html {
+  background: url(../images/bg.jpg) no-repeat left top fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  -webkit-touch-callout: none; /* iOS Safari */
+   -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+      -moz-user-select: none; /* Firefox */
+       -ms-user-select: none; /* Internet Explorer/Edge */
+           user-select: none;
+}
+
+.icon{
+  height:64px;
+  width:auto;
+}
+.icon-on{
+  background: rgba(255,171,64,1);
+}
+
+.sidebar{
+  background-color:rgb(255, 255, 255);
+  overflow:hidden;
+  width:150px;
+  margin-left:-150px;
+  opacity:0;
+  transition:0.2s linear all;
+}
+.sidebar-width{
+  margin-left:0;
+  opacity:1;
+  background-color:rgb(255, 255, 255);
+}
