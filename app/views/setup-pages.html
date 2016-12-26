@@ -1,0 +1,25 @@
+<md-list class="md-dense" flex="30">
+  <md-list-item>
+    <md-button style="width:100%;" class="md-raised">add new page</md-button>
+  </md-list-item>
+  <!-- {{(CONFIG.pages | filter : {pagename: 'Woonkamer'})[0].widgets }} -->
+
+  <md-list-item class="md-2-line" ng-repeat="page in CONFIG.pages" ng-click="null">
+    <div class="md-list-item-text">
+      <h3>{{page.pagename}}</h3>
+      <p>{{page.widgets.length}} widgets</p>
+    </div>
+    <md-button class="md-secondary md-icon-button md-warn" ng-click="null">
+      <md-icon>delete</md-icon>
+    </md-button>
+    <md-divider ng-if="!$last"></md-divider>
+  </md-list-item>
+
+
+</md-list>
+
+<md-content flex="70" layout="row" layout-wrap>
+  <div flex="25" ng-repeat="widget in (CONFIG.pages | filter : {pagename: 'Keuken'})[0].widgets">
+    {{widget.widgetname}}
+  </div>
+</md-content>

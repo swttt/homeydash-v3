@@ -1,23 +1,23 @@
 'use strict';
 
-describe('Controller: BottomsheetCtrl', function () {
+describe('Controller: SetupCtrl', function () {
 
   // load the controller's module
   beforeEach(module('homeydashV3App'));
 
-  var BottomsheetCtrl,
+  var SetupCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    BottomsheetCtrl = $controller('BottomsheetCtrl', {
+    SetupCtrl = $controller('SetupCtrl', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    expect(BottomsheetCtrl.awesomeThings.length).toBe(3);
+    expect(SetupCtrl.awesomeThings.length).toBe(3);
   });
 });

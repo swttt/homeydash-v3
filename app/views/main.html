@@ -1,23 +1,23 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<div class="sidebar md-whiteframe-5dp" ng-class="{'sidebar-width':sidebarWidth}">
+  <center><img src="/images/logo.png" style="padding:5px;" /></center>
+  <md-list flex>
+    <md-list-item class="md-1-line" ng-click="null" ng-repeat="(key,value) in CONFIG.pages" ui-sref="main.page({pagename: '{{key}}'})">
+      <div class="md-list-item-text" layout="column">
+        {{key}}
+      </div>
+      <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+  </md-list>
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+<md-content flex layout="row" layout-padding layout-wrap layout-align="start start" md-scroll-y style="background-color:rgba(255, 255, 255, 0);" ui-view>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+  <div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
+    <h2 style="color:white;text-transform:uppercase;font-weight:300;"><md-icon style="color:white;">keyboard_arrow_left</md-icon> Open a page in the sidebar on the left </h2>
+    <!-- <md-icon style="color:white;position:absolute;top:0px;right:10px;">settings</md-icon> -->
+  </div>
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+
+
+
+</md-content>

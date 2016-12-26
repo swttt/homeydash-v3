@@ -1,3 +1,20 @@
 {
-    "bearertoken": "YOUR API KEY"
+  "bearertoken": "YOUR BEARER TOKEN",
+  "homeyip": "YOUR HOMEY IP",
+  "pages": {
+    "woonkamer": {
+      "widgets": [{
+        "name": "staande lamp",
+        "capability": "onoff",
+        "deviceid": "a0b056b5-651d-42de-9f6d-f532ab6325b2"
+      }]
+    },
+    "keuken": {
+      "widgets": [{
+        "name": "Koffiezetapparaat",
+        "capability": "onoff",
+        "deviceid": "8031cd7a-614f-4dfe-a007-9bf5331ff16a"
+      }]
+    }
   }
+}

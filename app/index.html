@@ -18,53 +18,16 @@
   <!-- endbuild -->
 </head>
 
-<body ng-controller="MainCtrl" md-swipe-right="sidebarWidth=true" md-swipe-left="sidebarWidth=false">
+<body ng-controller="MainCtrl" md-swipe-right="sidebarWidth=true" md-swipe-left="sidebarWidth=false" ng-cloak>
 
   <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
   <!-- Add your site or application content here -->
-  <div layout="row" layout-fill>
-
-    <div class="sidebar md-whiteframe-5dp" ng-class="{'sidebar-width':sidebarWidth}">
-      <center><img src="/images/logo.png" style="padding:5px;" /></center>
-      <md-list flex>
-        <md-list-item class="md-1-line" ng-click="null">
-          <div class="md-list-item-text" layout="column">
-            Woonkamer
-          </div>
-        </md-list-item>
-        <md-divider></md-divider>
-        <md-list-item class="md-1-line" ng-click="null">
-          <div class="md-list-item-text" layout="column">
-            Keuken
-          </div>
-        </md-list-item>
-        <md-divider></md-divider>
-        <md-list-item class="md-1-line" ng-click="null">
-          <div class="md-list-item-text" layout="column">
-            Sabnzbd
-          </div>
-        </md-list-item>
-      </md-list>
-    </div>
-
-    <md-content flex layout="row" layout-padding layout-wrap layout-align="start start" md-scroll-y style="background-color:rgba(255, 255, 255, 0);">
-
-      <div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
-        <h2 style="display:inline;color:white;text-transform:uppercase;font-weight:300;">Woonkamer</h2>
-        <md-icon style="color:white;position:absolute;top:0px;right:10px;">settings</md-icon>
-      </div>
-
-      <hd-light hd-type="slider" flex="25" flex-xs="100" flex-xs="100"></hd-light>
-
-      <hd-light hd-type="switch" flex="25" flex-xs="100" flex-xs="100"></hd-light>
+  <div layout="row" layout-fill ui-view>
 
 
-
-
-    </md-content>
 
   </div>
 
@@ -87,7 +50,9 @@
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/main.js"></script>
-  <script src="scripts/directives/hdlight.js"></script>
+  <script src="scripts/controllers/setup.js"></script>
+  <script src="scripts/services/alldevices.js"></script>
+  <script src="scripts/services/device.js"></script>
   <!-- endbuild -->
 </body>
 

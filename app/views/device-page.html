@@ -1,0 +1,9 @@
+<div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
+  <h2 style="display:inline;color:white;text-transform:uppercase;font-weight:300;">{{params.pagename}}</h2>
+  <!-- <md-icon style="color:white;position:absolute;top:0px;right:10px;">settings</md-icon> -->
+</div>
+
+
+<widget ng-repeat="widget in CONFIG.pages[params.pagename].widgets" ng-include="'../views/' + widget.capability + '.html'" flex="25" flex-xs="100" flex-xs="100">
+
+</widget>

@@ -1,0 +1,24 @@
+<md-card>
+  <md-card-content layout="row" layout-wrap style="padding:0;margin:0;">
+
+
+    <md-list flex="100" style="padding:0;margin:0;">
+      <md-list-item class="md-2-line" style="padding:0;margin:0;">
+        <img ng-if="devicelist[widget.deviceid].state.onoff" ng-src="../images/icons/light_on.png" class="md-avatar" alt="icon" />
+        <img ng-if="!devicelist[widget.deviceid].state.onoff" ng-src="../images/icons/light_off.png" class="md-avatar" alt="icon" />
+        <div class="md-list-item-text" layout="column" style="margin-botton:0px;">
+          <h3>{{devicelist[widget.deviceid].name}}</h3>
+          <h4>{{devicelist[widget.deviceid].zone.name}}</h4>
+        </div>
+      </md-list-item>
+    </md-list>
+    <div flex="100" layout-align="center start" style="min-height:48px;height:48px;max-height:48px;margin:0px 20px 0px 20px;">
+
+      <md-switch ng-click="click(widget.deviceid, devicelist[widget.deviceid].state.onoff)" style="max-width:80px;margin:0 auto;" ng-model="devicelist[widget.deviceid].state.onoff" aria-label="Switch 1">
+        <span ng-if="devicelist[widget.deviceid].state.onoff">On</span>
+        <span ng-if="!devicelist[widget.deviceid].state.onoff">Off</span>
+      </md-switch>
+
+    </div>
+  </md-card-content>
+</md-card>
