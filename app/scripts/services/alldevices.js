@@ -12,7 +12,7 @@ angular.module('homeydashV3App')
 
     var obj = {};
     obj = function() {
-      return $http.get('http://' + CONFIG.homeyip + '/api/manager/devices/device/', CONFIG.httpconfig);
+      return $http.get('//' + CONFIG.homeyip + '/api/manager/devices/device/', CONFIG.httpconfig);
     };
 
     return obj;

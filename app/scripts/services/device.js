@@ -12,12 +12,12 @@ angular.module('homeydashV3App')
 
     var obj = {};
     obj.onoff = function(currentId, cmd) {
-      return $http.put('http://' + CONFIG.homeyip + '/api/manager/devices/device/' + currentId + '/state', {
+      return $http.put('//' + CONFIG.homeyip + '/api/manager/devices/device/' + currentId + '/state', {
         'onoff': cmd
       }, CONFIG.httpconfig);
     };
     obj.dim = function(currentId, dimValue) {
-      return $http.put('http://' + CONFIG.homeyip + '/api/manager/devices/device/' + currentId + '/state', {
+      return $http.put('//' + CONFIG.homeyip + '/api/manager/devices/device/' + currentId + '/state', {
         'dim': dimValue
       }, CONFIG.httpconfig);
     };

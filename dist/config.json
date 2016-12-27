@@ -1,6 +1,6 @@
 {
-  "bearertoken": "YOUR BEARER TOKEN",
-  "homeyip": "YOUR HOMEY IP",
+  "bearertoken": "BEARER TOKEN",
+  "homeyip": "HOMEY IP",
   "pages": {
     "woonkamer": {
       "widgets": [{
