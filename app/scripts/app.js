@@ -54,44 +54,44 @@ angular
     $stateProvider
       .state('setup', {
         url: '/setup',
-        templateUrl: '../views/setup.html',
+        templateUrl: 'views/setup.html',
         redirectTo: 'setup.general',
       })
       .state('setup.general', {
         url: '/general',
-        templateUrl: '../views/setup-general.html',
+        templateUrl: 'views/setup-general.html',
         data: {
           'selectedTab': 0
         }
       })
       .state('setup.pages', {
         url: '/pages',
-        templateUrl: '../views/setup-pages.html',
+        templateUrl: 'views/setup-pages.html',
         data: {
           'selectedTab': 1
         }
       })
       .state('setup.widgets', {
         url: '/widgets',
-        templateUrl: '../views/setup-widgets.html',
+        templateUrl: 'views/setup-widgets.html',
         data: {
           'selectedTab': 2
         }
       })
       .state('setup.plugins', {
         url: '/plugins',
-        templateUrl: '../views/setup-plugins.html',
+        templateUrl: 'views/setup-plugins.html',
         data: {
           'selectedTab': 3
         }
       })
       .state('main', {
         url: '/',
-        templateUrl: '../views/main.html'
+        templateUrl: 'views/main.html'
       })
       .state('main.page', {
         url: 'page/:pagename',
-        templateUrl: '../views/device-page.html'
+        templateUrl: 'views/device-page.html'
       });
 
   });
