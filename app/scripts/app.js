@@ -31,9 +31,9 @@ angular
         $rootScope.devicelist = {};
         $rootScope.devicelist = response.data.result;
       });
-      $timeout(devicesTimeout, 300);
+      $timeout(devicesTimeout, 2000);
     };
-    $timeout(devicesTimeout, 300);
+    $timeout(devicesTimeout, 2000);
 
 
 
