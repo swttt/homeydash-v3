@@ -28,11 +28,12 @@ angular
 
     var devicesTimeout = function() {
       alldevices().then(function(response) {
+        $rootScope.devicelist = {};
         $rootScope.devicelist = response.data.result;
       });
-      $timeout(devicesTimeout, 2000);
+      $timeout(devicesTimeout, 300);
     };
-    $timeout(devicesTimeout, 2000);
+    $timeout(devicesTimeout, 300);
 
 
 
