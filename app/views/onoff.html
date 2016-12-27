@@ -4,8 +4,8 @@
 
     <md-list flex="100" style="padding:0;margin:0;">
       <md-list-item class="md-2-line" style="padding:0;margin:0;">
-        <img ng-if="devicelist[widget.deviceid].state.onoff" ng-src="../images/icons/light_on.png" class="md-avatar" alt="icon" />
-        <img ng-if="!devicelist[widget.deviceid].state.onoff" ng-src="../images/icons/light_off.png" class="md-avatar" alt="icon" />
+        <img ng-if="devicelist[widget.deviceid].state.onoff" ng-src="images/icons/light_on.png" class="md-avatar" alt="icon" />
+        <img ng-if="!devicelist[widget.deviceid].state.onoff" ng-src="images/icons/light_off.png" class="md-avatar" alt="icon" />
         <div class="md-list-item-text" layout="column" style="margin-botton:0px;">
           <h3>{{devicelist[widget.deviceid].name}}</h3>
           <h4>{{devicelist[widget.deviceid].zone.name}}</h4>
