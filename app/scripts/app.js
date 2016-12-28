@@ -5,7 +5,7 @@
  * @name homeydashV3App
  * @description
  * # homeydashV3App
- *
+ * 
  * Main module of the application.
  */
 angular
@@ -22,18 +22,23 @@ angular
       .primaryPalette('orange')
       .accentPalette('orange');
   })
-  .run(function($rootScope, alldevices, $timeout) {
+  .run(function($rootScope, alldevices, CONFIG, socket, $sce) {
 
-
-
-    var devicesTimeout = function() {
-      alldevices().then(function(response) {
-        $rootScope.devicelist = {};
-        $rootScope.devicelist = response.data.result;
+    alldevices().then(function(response) {
+      $rootScope.devicelist = response.data.result;
+    }).then(function() {
+      angular.forEach(CONFIG.pages, function(value, key) {
+        angular.forEach(value.widgets, function(value, key) {
+          socket.on(value.capability, value.deviceid, function(data) {
+            $rootScope.devicelist[value.deviceid].state[value.capability] = data;
+            $rootScope.$apply();
+          });
+        });
       });
-      $timeout(devicesTimeout, 2000);
-    };
-    $timeout(devicesTimeout, 2000);
+    });
+
+
+
 
 
 

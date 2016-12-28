@@ -1,5 +1,5 @@
 <md-card>
-  <md-card-content layout="row" layout-wrap style="padding:0;margin:0;" ng-click="click(widget.deviceid, devicelist[widget.deviceid].state.onoff)">
+  <md-card-content layout="row" layout-wrap style="padding:0;margin:0;">
 
 
     <md-list flex="100" style="padding:0;margin:0;">
@@ -14,7 +14,7 @@
     </md-list>
     <div flex="100" layout-align="center start" style="min-height:48px;height:48px;max-height:48px;margin:0px 20px 0px 20px;">
 
-      <md-switch style="max-width:80px;margin:0 auto;pointer-events: none;" ng-model="devicelist[widget.deviceid].state.onoff" aria-label="Switch 1">
+      <md-switch ng-click="click(widget.deviceid, devicelist[widget.deviceid].state.onoff)" style="max-width:80px;margin:0 auto;" ng-model="devicelist[widget.deviceid].state.onoff" aria-label="Switch 1">
         <span ng-if="devicelist[widget.deviceid].state.onoff">On</span>
         <span ng-if="!devicelist[widget.deviceid].state.onoff">Off</span>
       </md-switch>
