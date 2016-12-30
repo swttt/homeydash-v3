@@ -5,7 +5,7 @@
  * @name homeydashV3App
  * @description
  * # homeydashV3App
- * 
+ *
  * Main module of the application.
  */
 angular
@@ -14,7 +14,8 @@ angular
     'ngResource',
     'ngSanitize',
     'ngMaterial',
-    'ui.router'
+    'ui.router',
+    'hmTouchEvents'
   ])
 
 .config(function($mdThemingProvider) {

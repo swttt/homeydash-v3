@@ -4,10 +4,10 @@
   </md-list-item>
   <!-- {{(CONFIG.pages | filter : {pagename: 'Woonkamer'})[0].widgets }} -->
 
-  <md-list-item class="md-2-line" ng-repeat="page in CONFIG.pages" ng-click="null">
+  <md-list-item class="md-2-line" ng-repeat="(key, value) in CONFIG.pages" ng-click="null">
     <div class="md-list-item-text">
-      <h3>{{page.pagename}}</h3>
-      <p>{{page.widgets.length}} widgets</p>
+      <h3>{{key}}</h3>
+      <p>{{value.widgets.length}} widgets</p>
     </div>
     <md-button class="md-secondary md-icon-button md-warn" ng-click="null">
       <md-icon>delete</md-icon>
@@ -18,8 +18,8 @@
 
 </md-list>
 
-<md-content flex="70" layout="row" layout-wrap>
-  <div flex="25" ng-repeat="widget in (CONFIG.pages | filter : {pagename: 'Keuken'})[0].widgets">
+<!-- <md-content flex="70" layout="row" layout-wrap>
+  <div flex="25" ng-repeat="widget in CONFIG.pages">
     {{widget.widgetname}}
   </div>
-</md-content>
+</md-content> -->

@@ -8,15 +8,39 @@
  * Controller of the homeydashV3App
  */
 angular.module('homeydashV3App')
-  .controller('MainCtrl', function($scope, $stateParams, device, socket, alldevices, $rootScope, CONFIG, $sce) {
+  .controller('MainCtrl', function($scope, $stateParams, device, socket, alldevices, $rootScope, CONFIG, $sce, $mdToast) {
     $scope.sidebarWidth = 'flex-20';
     $scope.params = $stateParams;
 
     $scope.click = function(currentId, cmd) {
       if (cmd) {
-        device.onoff(currentId, false);
+        device.onoff(currentId, false).then(function(response) {
+
+        }, function(error) {
+          if (error) {
+            $mdToast.show(
+              $mdToast.simple()
+              .textContent('ERROR: ' + error.statusText)
+              .position('top right')
+              .hideDelay(3000)
+            );
+            $rootScope.devicelist[currentId].state.onoff = true;
+          };
+        });
       } else {
-        device.onoff(currentId, true);
+        device.onoff(currentId, true).then(function(response) {
+
+        }, function(error) {
+          if (error) {
+            $mdToast.show(
+              $mdToast.simple()
+              .textContent('ERROR: ' + error.statusText)
+              .position('top right')
+              .hideDelay(3000)
+            );
+            $rootScope.devicelist[currentId].state.onoff = false;
+          };
+        });
       }
     };
 
