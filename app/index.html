@@ -19,14 +19,14 @@
   <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body ng-controller="MainCtrl" hm-swiperight="sidebarWidth=true" hm-swipeleft="sidebarWidth=false" ng-cloak>
+<body ng-controller="MainCtrl" ng-cloak>
 
   <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
   <!-- Add your site or application content here -->
-  <div layout="row" layout-fill ui-view>
+  <div layout="row" layout-fill ui-view ng-swipe-right="sidebarWidth=true" ng-swipe-left="sidebarWidth=false">
 
 
 
@@ -45,8 +45,6 @@
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-material/angular-material.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="bower_components/hammerjs/hammer.js"></script>
-  <script src="bower_components/AngularHammer/angular.hammer.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 

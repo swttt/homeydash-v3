@@ -15,7 +15,7 @@ angular
     'ngSanitize',
     'ngMaterial',
     'ui.router',
-    'hmTouchEvents'
+    'ngTouch'
   ])
 
 .config(function($mdThemingProvider) {
