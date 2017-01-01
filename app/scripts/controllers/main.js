@@ -8,11 +8,55 @@
  * Controller of the homeydashV3App
  */
 angular.module('homeydashV3App')
-  .controller('MainCtrl', function($scope, $stateParams, device, socket, alldevices, $rootScope, CONFIG, $sce, $mdToast) {
+  .controller('MainCtrl', function($window, $scope, $stateParams, device, socket, alldevices, $rootScope, CONFIG, $sce, $mdToast) {
     $scope.sidebarWidth = 'flex-20';
     $scope.params = $stateParams;
 
-    $scope.click = function(currentId, cmd) {
+
+    if (Object.keys($rootScope.CONFIG.pages).length === 0) {
+      $scope.noPages = true;
+    } else {
+      $scope.noPages = false;
+    }
+
+    var sidebarsize = $window.innerHeight - 110;
+    $(window).resize(function() {
+      sidebarsize = $window.innerHeight - 110;
+
+      $scope.$apply(function() {
+        $scope.config = {
+          autoHideScrollbar: false,
+          theme: 'minimal-dark',
+          advanced: {
+            updateOnContentResize: true
+          },
+          setHeight: sidebarsize,
+          scrollInertia: 0
+        }
+      });
+    });
+    $scope.config = {
+      autoHideScrollbar: false,
+      theme: 'minimal-dark',
+      advanced: {
+        updateOnContentResize: true
+      },
+      setHeight: sidebarsize,
+      scrollInertia: 0
+    }
+
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      alldevices().then(function(response) {
+        $rootScope.devicelist = response.data.result;
+        console.log('Updated devicelist!')
+      });
+    });
+
+    $scope.socketurl = $sce.trustAsResourceUrl('//' + CONFIG.homeyip + '/socket.io/socket.io.js');
+
+    // Capability commands
+    $scope.onoff = function(currentId, cmd) {
       if (cmd) {
         device.onoff(currentId, false).then(function(response) {
 
@@ -43,17 +87,5 @@ angular.module('homeydashV3App')
         });
       }
     };
-
-
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      alldevices().then(function(response) {
-        $rootScope.devicelist = response.data.result;
-        console.log('Updated devicelist!')
-      });
-    });
-
-    $scope.socketurl = $sce.trustAsResourceUrl('//' + CONFIG.homeyip + '/socket.io/socket.io.js');
-
-
 
   });

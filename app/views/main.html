@@ -1,8 +1,8 @@
 <div class="sidebar md-whiteframe-5dp" ng-class="{'sidebar-width':sidebarWidth}">
   <center><img src="images/logo.png" style="padding:5px;" /></center>
-  <md-list flex>
+  <md-list id="sidebar" flex ng-scrollbars ng-scrollbars-config="config">
     <md-list-item class="md-1-line" ng-click="null" ng-repeat="(key,value) in CONFIG.pages" ui-sref="main.page({pagename: '{{key}}'})">
-      <div class="md-list-item-text" layout="column">
+      <div class="md-list-item-text" layout="column" md-scroll-y>
         {{key}}
       </div>
       <md-divider ng-if="!$last"></md-divider>
@@ -13,8 +13,14 @@
 <md-content flex layout="row" layout-padding layout-wrap layout-align="start start" md-scroll-y style="background-color:rgba(255, 255, 255, 0);" ui-view>
 
   <div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
-    <h2 style="color:white;text-transform:uppercase;font-weight:300;"><md-icon style="color:white;">keyboard_arrow_left</md-icon> Open a page in the sidebar on the left </h2>
-    <!-- <md-icon style="color:white;position:absolute;top:0px;right:10px;">settings</md-icon> -->
+
+    <h2 ng-if="!noPages" style="color:white;text-transform:uppercase;font-weight:300;"><md-icon style="color:white;">keyboard_arrow_left</md-icon> Open a page in the sidebar on the left </h2>
+    <h2 ng-if="noPages" style="color:white;text-transform:uppercase;font-weight:300;">No pages found!</h2>
+    <p ng-if="noPages" style="color:white;"> Press the
+      <md-icon style="color:white;">settings</md-icon> on the top right to go to the setup.</p>
+
+    <md-icon ng-if="!CONFIG.general.hideicon" ng-click="null" style="color:white;position:absolute;top:0px;right:10px;cursor:pointer;" ui-sref="setup">settings</md-icon>
+
   </div>
 
 

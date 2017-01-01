@@ -1,0 +1,15 @@
+<md-dialog aria-label="Remove page">
+  <md-dialog-content class="md-dialog-content" aria-label="Remove page">
+    <h2 class="md-title">Remove widget from page</h2>
+    <p>You are about to remove the widget <b>{{widgetname}}</b>. <br/>Are you sure?</p>
+
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="closeWidgetDialog()" class="md-warn">
+      No
+    </md-button>
+    <md-button ng-click="removeWidgetDialog(pagename,widgetname,idx)" class="md-primary">
+      Yes
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

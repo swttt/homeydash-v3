@@ -1,1 +1,15 @@
-<p>This is the setup-general view.</p>
+<md-list style="width:100%;">
+
+  <md-subheader class="md-no-sticky" style="background-color:white;">Look and feel</md-subheader>
+
+  <md-list-item>
+    <p>Hide the setup icon on your dashboard</p>
+    <md-checkbox ng-change="saveSettings()" ng- class="md-secondary" ng-model="CONFIG.general.hideicon"></md-checkbox>
+  </md-list-item>
+
+  <md-list-item>
+    <p>Hide zone name on widget cards</p>
+    <md-checkbox ng-change="saveSettings()" class="md-secondary" ng-model="CONFIG.general.hidezonename"></md-checkbox>
+  </md-list-item>
+
+</md-list>

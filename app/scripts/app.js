@@ -15,13 +15,28 @@ angular
     'ngSanitize',
     'ngMaterial',
     'ui.router',
-    'ngTouch'
+    'ngTouch',
+    'ngScrollbars'
   ])
 
-.config(function($mdThemingProvider) {
+.config(function($mdThemingProvider, $mdDialogProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('orange')
       .accentPalette('orange');
+
+    $mdDialogProvider.addPreset('addPage', {
+      options: function() {
+        return {
+          templateUrl: 'views/dialogaddpage.html',
+          controller: 'DialogaddpageCtrl',
+          autoWrap: false,
+          clickOutsideToClose: false,
+          escapeToClose: false
+        };
+      }
+    });
+
+
   })
   .run(function($rootScope, alldevices, CONFIG, socket, $sce) {
 
@@ -78,18 +93,19 @@ angular
           'selectedTab': 1
         }
       })
-      .state('setup.widgets', {
-        url: '/widgets',
-        templateUrl: 'views/setup-widgets.html',
+      .state('setup.pages.page', {
+        url: '/:pagename',
+        templateUrl: 'views/setup-widgetsview.html',
         data: {
-          'selectedTab': 2
+          'selectedTab': 1
         }
       })
-      .state('setup.plugins', {
+
+    .state('setup.plugins', {
         url: '/plugins',
         templateUrl: 'views/setup-plugins.html',
         data: {
-          'selectedTab': 3
+          'selectedTab': 2
         }
       })
       .state('main', {

@@ -1,15 +1,15 @@
 <md-list class="md-dense" flex="30">
   <md-list-item>
-    <md-button style="width:100%;" class="md-raised">add new page</md-button>
+    <md-button style="width:100%;" class="md-raised" ng-click="addpage()">add new page</md-button>
   </md-list-item>
   <!-- {{(CONFIG.pages | filter : {pagename: 'Woonkamer'})[0].widgets }} -->
 
-  <md-list-item class="md-2-line" ng-repeat="(key, value) in CONFIG.pages" ng-click="null">
+  <md-list-item style="margin-left:7px;margin-right:7px;" class="md-2-line" ng-repeat="(key, value) in CONFIG.pages" ui-sref="setup.pages.page({pagename: '{{key}}'})">
     <div class="md-list-item-text">
       <h3>{{key}}</h3>
-      <p>{{value.widgets.length}} widgets</p>
+      <p>{{value.widgets.length || '0'}} widgets</p>
     </div>
-    <md-button class="md-secondary md-icon-button md-warn" ng-click="null">
+    <md-button class="md-secondary md-icon-button md-warn" ng-click="delete(key)">
       <md-icon>delete</md-icon>
     </md-button>
     <md-divider ng-if="!$last"></md-divider>
@@ -18,8 +18,6 @@
 
 </md-list>
 
-<!-- <md-content flex="70" layout="row" layout-wrap>
-  <div flex="25" ng-repeat="widget in CONFIG.pages">
-    {{widget.widgetname}}
-  </div>
-</md-content> -->
+<div flex="70" style="margin-top:5px;position:relative;" layout="row" layout-wrap ui-view>
+  <h3 style="font-weight:300;width:100%;text-align:center;">Select a page on the left to add widgets to. <br/>Then click the plus icon in the right top corner to add a widget.</h3>
+</div>
