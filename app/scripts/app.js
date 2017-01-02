@@ -16,7 +16,8 @@ angular
     'ngMaterial',
     'ui.router',
     'ngTouch',
-    'ngScrollbars'
+    'ngScrollbars',
+    'ngCookies'
   ])
 
 .config(function($mdThemingProvider, $mdDialogProvider) {
@@ -38,7 +39,12 @@ angular
 
 
   })
-  .run(function($rootScope, alldevices, CONFIG, socket, $sce) {
+  .run(function($rootScope, alldevices, CONFIG, socket, $sce, $cookies) {
+
+    $cookies.put('bearer_token', CONFIG.bearertoken, {
+      'domain': '192.168.2.72'
+    });
+
 
     alldevices().then(function(response) {
       $rootScope.devicelist = response.data.result;
