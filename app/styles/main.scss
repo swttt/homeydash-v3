@@ -14,16 +14,25 @@
  }
 
 body {
-  padding: 0;
-  background-color:rgba(255, 255, 255, 0);
+  position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.bg{
+  background-image: url(/manager/personalization/wallpapers/system/homey.jpg);
+  background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: left top;
+background-size: cover;
 }
 
+
+
 html {
-  background: url(../images/bg.jpg) no-repeat left top fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
   -webkit-touch-callout: none; /* iOS Safari */
    -webkit-user-select: none; /* Chrome/Safari/Opera */
     -khtml-user-select: none; /* Konqueror */
@@ -45,11 +54,56 @@ html {
   overflow:hidden;
   width:150px;
   margin-left:-150px;
-  opacity:0;
   transition:0.2s linear all;
 }
 .sidebar-width{
   margin-left:0;
-  opacity:1;
   background-color:rgb(255, 255, 255);
+}
+
+md-list-item.active{
+  background-color:rgb(227,227,227);
+}
+
+.idleoverlay{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:999;
+  background-color:rgba(0,0,0,0.8);
+}
+.idleoverlay.ng-enter{
+  transition:0.5s linear all;
+  background-color:rgba(0,0,0,0);
+}
+.idleoverlay.ng-enter.ng-enter-active{
+    background-color:rgba(0,0,0,0.8);
+}
+.idleoverlay.ng-leave{
+  transition:0.5s linear all;
+    background-color:rgba(0,0,0,0.8);
+}
+.idleoverlay.ng-leave.ng-leave-active{
+    background-color:rgba(0,0,0,0);
+}
+
+.ng-inline-edit__input {
+  font-weight:300;
+}
+
+.widgetselect:hover{
+  background-color:rgb(255,152,0);
+  color:white;
+}
+
+.menu-handle{
+  color:white;
+  cursor:pointer;
+  margin-top:-10px;
+}
+.md-sidenav-left{
+  width:200px;
+  min-width:200px;
 }

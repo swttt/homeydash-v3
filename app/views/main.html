@@ -1,26 +1,29 @@
-<div class="sidebar md-whiteframe-5dp" ng-class="{'sidebar-width':sidebarWidth}">
+<div ng-if="hideOverlay" class="idleoverlay"> </div>
+
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="localStorage.sidebarLocked" md-whiteframe="4">
+
   <center><img src="images/logo.png" style="padding:5px;" /></center>
   <md-list id="sidebar" flex ng-scrollbars ng-scrollbars-config="config">
-    <md-list-item class="md-1-line" ng-click="null" ng-repeat="(key,value) in CONFIG.pages" ui-sref="main.page({pagename: '{{key}}'})">
+    <md-list-item class="md-1-line" ng-repeat="page in CONFIG.pages" ng-click="switchSidebar()" ui-sref="main.page({pagename: '{{page.pagename}}'})">
       <div class="md-list-item-text" layout="column" md-scroll-y>
-        {{key}}
+        {{page.pagename}}
       </div>
       <md-divider ng-if="!$last"></md-divider>
     </md-list-item>
   </md-list>
-</div>
+</md-sidenav>
 
-<md-content flex layout="row" layout-padding layout-wrap layout-align="start start" md-scroll-y style="background-color:rgba(255, 255, 255, 0);" ui-view>
+<md-content flex layout="row" layout-padding layout-wrap layout-align="start start" md-scroll-y style="background-color:rgba(255, 255, 255, 0);padding-top:15px;" ui-view>
 
   <div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
-
+    <md-icon ng-if="!localStorage.sidebarLocked" ng-click="switchSidebar()" class="menu-handle">menu</md-icon>
     <h2 ng-if="!noPages" style="color:white;text-transform:uppercase;font-weight:300;"><md-icon style="color:white;">keyboard_arrow_left</md-icon> Open a page in the sidebar on the left </h2>
     <h2 ng-if="noPages" style="color:white;text-transform:uppercase;font-weight:300;">No pages found!</h2>
     <p ng-if="noPages" style="color:white;"> Press the
       <md-icon style="color:white;">settings</md-icon> on the top right to go to the setup.</p>
 
     <md-icon ng-if="!CONFIG.general.hideicon" ng-click="null" style="color:white;position:absolute;top:0px;right:10px;cursor:pointer;" ui-sref="setup">settings</md-icon>
-
+    <md-icon onclick="location.reload();" style="color:white;position:absolute;top:0px;right:75px;cursor:pointer;">replay</md-icon>
   </div>
 
 

@@ -7,17 +7,23 @@
   <meta name="description" content="">
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="img/ico" href="favicon.ico">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
+  <link rel="stylesheet" href="bower_components/ng-inline-edit/dist/ng-inline-edit.css" />
+  <link rel="stylesheet" href="bower_components/angular-wizard/dist/angular-wizard.min.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
   <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body ng-controller="MainCtrl" ng-cloak>
@@ -27,13 +33,13 @@
     <![endif]-->
 
   <!-- Add your site or application content here -->
-  <div layout="row" layout-fill ui-view ng-swipe-right="sidebarWidth=true" ng-swipe-left="sidebarWidth=false">
+  <div style="background-image: url(http://192.168.2.72/manager/personalization/wallpapers/{{wallpaper || 'system/homey.jpg'}});" class="bg" layout="row" layout-fill ui-view>
 
 
 
   </div>
 
-
+  <script src="http://192.168.2.72/socket.io/socket.io.js"></script>
 
   <!-- build:js(.) scripts/vendor.js -->
   <!-- bower:js -->
@@ -42,7 +48,6 @@
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-  <script src="bower_components/angular-touch/angular-touch.js"></script>
   <script src="bower_components/angular-aria/angular-aria.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-material/angular-material.js"></script>
@@ -50,10 +55,16 @@
   <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
   <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
   <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
-  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.js"></script>
+  <script src="bower_components/ng-idle/angular-idle.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+  <script src="bower_components/ng-inline-edit/dist/ng-inline-edit.js"></script>
+  <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+  <script src="bower_components/angular-debounce/dist/angular-debounce.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/main.js"></script>
@@ -62,12 +73,13 @@
   <script src="scripts/services/device.js"></script>
   <script src="scripts/services/socket.js"></script>
   <script src="scripts/services/savesettings.js"></script>
-  <script src="scripts/controllers/dialogaddpage.js"></script>
-  <script src="scripts/controllers/dialogremovepage.js"></script>
   <script src="scripts/controllers/dialogremovewidget.js"></script>
   <script src="scripts/controllers/dialogaddwidget.js"></script>
+  <script src="scripts/services/wallpaper.js"></script>
+  <script src="scripts/controllers/devices.js"></script>
+  <script src="scripts/controllers/agreement.js"></script>
   <!-- endbuild -->
-  <script ng-src="{{socketurl}}"></script>
+
 
 </body>
 

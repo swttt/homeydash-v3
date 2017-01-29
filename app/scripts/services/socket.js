@@ -13,7 +13,7 @@ angular.module('homeydashV3App')
 
     return {
       on: function(eventName, deviceid, callback) {
-        var socket = io.connect('http://' + CONFIG.homeyip + '/realtime/device/' + deviceid + '/', {
+        var socket = io.connect('http://192.168.2.72/realtime/device/' + deviceid + '/', {
           transports: ['websocket', 'polling'],
         });
         socket.on(eventName, callback);

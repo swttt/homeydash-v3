@@ -1,15 +1,49 @@
 <md-list style="width:100%;">
 
+  <md-subheader class="md-no-sticky" style="background-color:white;">General</md-subheader>
+
+  <md-list-item>
+    <p>Set a default page</p>
+    <md-select class="md-secondary" ng-model="storage.defaultPage">
+      <md-option ng-value="false"><em>None</em></md-option>
+      <md-option ng-repeat="page in CONFIG.pages" ng-value="page.pagename">
+        {{page.pagename}}
+      </md-option>
+    </md-select>
+  </md-list-item>
+
+  <md-list-item>
+    <p>Set dashboard screen dimming time <small><b>(requires page refresh)</b></small></p>
+    <md-select class="md-secondary" ng-change="saveSettings()" ng-model="CONFIG.general.idletime">
+      <md-option ng-value="0">Disable</md-option>
+      <md-option ng-repeat="value in SETUP.dimmingvalues" ng-value="value">
+        {{value}} sec
+      </md-option>
+    </md-select>
+  </md-list-item>
+
+
+
   <md-subheader class="md-no-sticky" style="background-color:white;">Look and feel</md-subheader>
 
   <md-list-item>
     <p>Hide the setup icon on your dashboard</p>
-    <md-checkbox ng-change="saveSettings()" ng- class="md-secondary" ng-model="CONFIG.general.hideicon"></md-checkbox>
+    <md-checkbox ng-change="saveSettings()" class="md-secondary" ng-model="CONFIG.general.hideicon"></md-checkbox>
   </md-list-item>
 
   <md-list-item>
     <p>Hide zone name on widget cards</p>
     <md-checkbox ng-change="saveSettings()" class="md-secondary" ng-model="CONFIG.general.hidezonename"></md-checkbox>
+  </md-list-item>
+
+  <md-list-item>
+    <p>Lock the sidebar to allways open (this would disable open and close)</p>
+    <md-checkbox ng-change="saveSettings()" class="md-secondary" ng-model="storage.sidebarLocked"></md-checkbox>
+  </md-list-item>
+
+  <md-list-item>
+    <p>Hide kwh on capable widget cards</p>
+    <md-checkbox ng-change="saveSettings()" class="md-secondary" ng-model="storage.hidekwh"></md-checkbox>
   </md-list-item>
 
 </md-list>

@@ -1,9 +1,20 @@
 <div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
-  <h2 style="display:inline;color:white;text-transform:uppercase;font-weight:300;">{{params.pagename}}</h2>
+  <md-icon ng-if="!localStorage.sidebarLocked" ng-click="switchSidebar()" class="menu-handle">menu</md-icon>
+  <h2 style="margin-left:15px;display:inline;color:white;text-transform:uppercase;font-weight:300;">{{params.pagename}}</h2>
   <md-icon ng-if="!CONFIG.general.hideicon" ng-click="null" style="color:white;position:absolute;top:0px;right:10px;cursor:pointer;" ui-sref="setup">settings</md-icon>
+  <md-icon onclick="location.reload();" style="color:white;position:absolute;top:0px;right:75px;cursor:pointer;">replay</md-icon>
 </div>
 
+<md-grid-list flex="100" layout-align="start start" md-cols="8" md-row-height="2:1" md-gutter="10px">
 
-<widget ng-repeat="widget in CONFIG.pages[params.pagename].widgets" ng-include="'views/' + widget.capability + '.html'" flex="25" flex-sm="50" flex-xs="100">
+  <md-grid-tile style="" md-rowspan="2" md-colspan="2" ng-repeat="widget in CONFIG.pages[getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename)].widgets">
+    <widget style="width:100%;height:100%;" ng-include src="'views/' + widget.widgettype + '.html'" ng-controller="DevicesCtrl" widget="widget.widgettype">
+    </widget>
+  </md-grid-tile>
 
-</widget>
+  <md-grid-tile style="overflow:hidden;" md-rowspan="4" md-colspan="2">
+    <img class="md-whiteframe-3dp" border="0" src="http://api.buienradar.nl/image/1.0/RadarMapNL" style="width:100%;">
+  </md-grid-tile>
+
+
+</md-grid-list>

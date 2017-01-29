@@ -9,11 +9,15 @@
 
 module.exports = function(grunt) {
 
+
+
+
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
+    replace: 'grunt-text-replace',
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn'
@@ -22,7 +26,7 @@ module.exports = function(grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'com.swttt.homeydash/www'
   };
 
   // Define the configuration for all the tasks
@@ -263,7 +267,6 @@ module.exports = function(grunt) {
         src: [
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
-          '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.dist %>/styles/fonts/*'
         ]
       }
@@ -405,6 +408,31 @@ module.exports = function(grunt) {
       }
     },
 
+    // Test string Replace
+    // html: ['<%= yeoman.dist %>/{,*/}*.html'],
+    // css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+    // js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
+    replace: {
+      html: {
+        src: ['<%= yeoman.dist %>/{,*/}*.html'],
+        overwrite: true,
+        replacements: [{
+          from: /http:\/\/192.168.2.72\//g,
+          to: "/"
+        }]
+      },
+      js: {
+        src: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
+        overwrite: true,
+        replacements: [{
+          from: /http:\/\/192.168.2.72\//g,
+          to: "/"
+        }]
+      }
+    },
+
+
+
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -414,7 +442,7 @@ module.exports = function(grunt) {
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            '*.{ico,png,txt}',
+            '*.{ico,png,txt,json}',
             '*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
@@ -503,8 +531,10 @@ module.exports = function(grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'replace'
   ]);
+
 
   grunt.registerTask('default', [
     'newer:jshint',

@@ -1,0 +1,22 @@
+<div flex="100">
+  <center>
+    <h2 style="font-weight:300;text-transform:uppercase;">Add new page</h2></center>
+
+  <md-content aria-label="Add new page" style="background-color:white;">
+    <center>
+      <md-input-container md-no-float style="width:50%;">
+        <input ng-model="newpagename" type="text" placeholder="Give your new page a name...">
+      </md-input-container>
+    </center>
+  </md-content>
+  <center>
+    <md-actions style="">
+      <md-button ui-sref="setup.pages" class="md-warn md-raised">
+        Cancel
+      </md-button>
+      <md-button ng-click="savePage(newpagename)" class="md-primary md-raised">
+        Save
+      </md-button>
+    </md-actions>
+  </center>
+</div>

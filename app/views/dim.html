@@ -14,11 +14,10 @@
     </md-list>
     <div flex="100" layout-align="center start" style="min-height:48px;height:48px;max-height:48px;margin:0px 20px 0px 20px;">
 
-      <md-switch ng-click="onoff(widget.deviceid, devicelist[widget.deviceid].state.onoff)" style="max-width:80px;margin:0 auto;" ng-model="devicelist[widget.deviceid].state.onoff" aria-label="Switch 1">
-        <span ng-if="devicelist[widget.deviceid].state.onoff">On</span>
-        <span ng-if="!devicelist[widget.deviceid].state.onoff">Off</span>
-      </md-switch>
-      <div style="width:100%;text-align:right;font-size:10px;" ng-if="devicelist[widget.deviceid].state.meter_power && !localStorage.hidekwh">{{devicelist[widget.deviceid].state.meter_power}} kwh</div>
+
+      <md-slider style="margin:0 auto;" ng-change="dim(widget.deviceid, devicelist[widget.deviceid].state.dim);" ng-model="devicelist[widget.deviceid].state.dim" flex min="0" step="0.01" max="1" aria-label="dim">
+      </md-slider>
+
     </div>
   </md-card-content>
 </md-card>

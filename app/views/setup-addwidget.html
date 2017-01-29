@@ -1,0 +1,29 @@
+<div flex="100">
+  <center>
+    <h2 style="font-weight:300;text-transform:uppercase;">Add widget to {{params.pagename}}</h2></center>
+
+
+  <div style="text-align:center;">
+    <h3 style="font-weight:300;text-transform:uppercase; ">Select a widget type</h3>
+    <md-grid-list flex="100" md-cols="4" md-gutter="0em" md-row-height="150px">
+      <md-grid-tile style="text-align:left;" ng-repeat="type in SETUP.widgettypes" md-colspan="1" md-rowspan="1">
+        <md-card style="width:100%;height:100%;cursor:pointer;" class="widgetselect" ui-sref="setup.pages.addwidgettype({
+            pagename: params.pagename,
+            type: type.type
+          })">
+          <md-card-content style="">
+            <h3 style="font-weight:300;text-transform:uppercase;margin-top:0;padding-top:0;">{{type.type}}</h3>
+            <p style="font-size:0.75em;">{{type.description}}</p>
+
+          </md-card-content>
+        </md-card>
+      </md-grid-tile>
+    </md-grid-list>
+    <br/>
+    <md-button class="md-raised md-warn " ui-sref="setup.pages.page({
+        pagename: params.pagename
+      })"> Cancel </md-button>
+  </div>
+
+  </center>
+</div>

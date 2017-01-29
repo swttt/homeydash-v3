@@ -8,9 +8,57 @@
  * Controller of the homeydashV3App
  */
 angular.module('homeydashV3App')
-  .controller('MainCtrl', function($window, $scope, $stateParams, device, socket, alldevices, $rootScope, CONFIG, $sce, $mdToast) {
-    $scope.sidebarWidth = 'flex-20';
+  .controller('MainCtrl', function($localStorage, $mdSidenav, Idle, $window, $scope, $stateParams, device, socket, alldevices, $rootScope, CONFIG, $sce, $mdToast, $mdDialog) {
     $scope.params = $stateParams;
+
+    if (!localStorage.getItem('agreement')) {
+      $mdDialog.show({
+          templateUrl: 'views/agreement.html',
+          clickOutsideToClose: false,
+          fullscreen: true,
+          controller: 'AgreementCtrl',
+          hasBackdrop: false,
+          escapeToClose: false
+        })
+        .then(function() {
+          localStorage.setItem('agreement', true);
+        });
+
+    }
+
+
+
+    $scope.localStorage = $localStorage;
+
+    $scope.hideOverlay = false;
+    $scope.$on('IdleStart', function() {
+      // the user appears to have gone idle
+      $scope.hideOverlay = true;
+      $scope.$apply();
+    });
+
+    $scope.$on('IdleEnd', function() {
+      // the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
+      $scope.hideOverlay = false;
+      $scope.$apply();
+    });
+
+    $scope.switchSidebar = function() {
+      $mdSidenav('left').toggle();
+
+    };
+
+
+    $scope.getIdbyAtrr = function(array, attr, value) {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].hasOwnProperty(attr) && array[i][attr] === value) {
+          return i;
+        }
+      }
+      return -1;
+    };
+
+
 
 
     if (Object.keys($rootScope.CONFIG.pages).length === 0) {
@@ -32,7 +80,7 @@ angular.module('homeydashV3App')
           },
           setHeight: sidebarsize,
           scrollInertia: 0
-        }
+        };
       });
     });
     $scope.config = {
@@ -43,49 +91,17 @@ angular.module('homeydashV3App')
       },
       setHeight: sidebarsize,
       scrollInertia: 0
-    }
+    };
 
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    $rootScope.$on('$stateChangeStart', function() {
       alldevices().then(function(response) {
         $rootScope.devicelist = response.data.result;
-        console.log('Updated devicelist!')
+        console.log('Updated devicelist!');
       });
     });
 
-    $scope.socketurl = $sce.trustAsResourceUrl('//' + CONFIG.homeyip + '/socket.io/socket.io.js');
 
-    // Capability commands
-    $scope.onoff = function(currentId, cmd) {
-      if (cmd) {
-        device.onoff(currentId, false).then(function(response) {
 
-        }, function(error) {
-          if (error) {
-            $mdToast.show(
-              $mdToast.simple()
-              .textContent('ERROR: ' + error.statusText)
-              .position('top right')
-              .hideDelay(3000)
-            );
-            $rootScope.devicelist[currentId].state.onoff = true;
-          };
-        });
-      } else {
-        device.onoff(currentId, true).then(function(response) {
-
-        }, function(error) {
-          if (error) {
-            $mdToast.show(
-              $mdToast.simple()
-              .textContent('ERROR: ' + error.statusText)
-              .position('top right')
-              .hideDelay(3000)
-            );
-            $rootScope.devicelist[currentId].state.onoff = false;
-          };
-        });
-      }
-    };
 
   });

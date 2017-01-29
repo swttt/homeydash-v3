@@ -12,14 +12,14 @@ angular.module('homeydashV3App')
 
     var obj = {};
     obj.onoff = function(currentId, cmd) {
-      return $http.put('//' + CONFIG.homeyip + '/api/manager/devices/device/' + currentId + '/state', {
+      return $http.put('http://192.168.2.72/api/manager/devices/device/' + currentId + '/state', {
         'onoff': cmd
-      }, CONFIG.httpconfig);
+      });
     };
     obj.dim = function(currentId, dimValue) {
-      return $http.put('//' + CONFIG.homeyip + '/api/manager/devices/device/' + currentId + '/state', {
+      return $http.put('http://192.168.2.72/api/manager/devices/device/' + currentId + '/state', {
         'dim': dimValue
-      }, CONFIG.httpconfig);
+      });
     };
     return obj;
 

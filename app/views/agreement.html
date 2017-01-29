@@ -1,0 +1,40 @@
+<md-dialog>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 style="font-weight:300;text-transform:uppercase;">Agreement</h2>
+      <span flex></span>
+
+    </div>
+  </md-toolbar>
+  <md-dialog-content style="padding:15px;">
+    <h3 style="font-weight:bold;text-transform:uppercase;">
+      Please read before you continue
+    </h3>
+    <p>
+      For HomeyDash to function properly, it uses the cookie Athom creates on login. Within this cookie is your <b>bearer token</b> stored. This token is used to control your devices, but has the ability to do more then just controlling. (for example
+      adding, removing or changing devices/settings etc.). The chances are small (and i mean really small) but it could happen that some error in the code might remove a device or change something unwanted and without prompting you. Thats why i ask you
+      to agree with the following terms before you can use the dashboard:
+      <ul>
+        <li>
+          I understand the power of the bearer token
+        </li>
+        <li>
+          I agree that HomeyDash uses my bearer token to control my devices
+        </li>
+        <li>
+          I agree that i use this on my own risk
+        </li>
+        <li>
+          I agree that i cannot blame Athom or the creator for any errors and unwanted changes to my devices caused by HomeyDash
+        </li>
+      </ul>
+    </p>
+    <div style="width:100%;text-align:center;">
+      <md-button class="md-primary md-raised" ng-click="agree()">
+        I Agree
+      </md-button>
+    </div>
+  </md-dialog-content>
+
+
+</md-dialog>

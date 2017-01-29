@@ -8,28 +8,25 @@
  * Controller of the homeydashV3App
  */
 angular.module('homeydashV3App')
-  .controller('DialogaddwidgetCtrl', function($scope, $rootScope, $mdToast, $mdDialog, savesettings, pagename) {
-    $scope.pagename = pagename;
+  .controller('DialogaddwidgetCtrl', function($scope, $rootScope, $mdToast, $mdDialog, savesettings, pageid) {
+    //$scope.pagename = $rootScope.CONFIG.pages[pageid].pagename;
     $scope.devicelist = $rootScope.devicelist;
 
 
 
 
     $scope.saveNewwidgetDialog = function(widgetname, widgetid, capability, pagename) {
-      console.log(widgetname, widgetid, capability, pagename);
-      $rootScope.CONFIG.pages[pagename].widgets.push({
+      console.log(widgetname, widgetid, capability, pageid);
+      $rootScope.CONFIG.pages[pageid].widgets.push({
         "name": widgetname,
-        "capability": capability,
+        "widgettype": capability,
+        "capability": Object.keys($rootScope.devicelist[widgetid].capabilities),
         "deviceid": widgetid
       });
-      console.log($rootScope.CONFIG.pages[pagename]);
+      console.log($rootScope.CONFIG.pages[pageid]);
 
       savesettings.save($rootScope.CONFIG).then(function(response) {
-        $mdToast.show(
-          $mdToast.simple()
-          .textContent('Page saved!')
-          .position('top right')
-        );
+
       }, function(error) {
         $mdToast.show(
           $mdToast.simple()

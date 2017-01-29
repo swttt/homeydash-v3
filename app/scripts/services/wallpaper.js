@@ -2,19 +2,17 @@
 
 /**
  * @ngdoc service
- * @name homeydashV3App.alldevices
+ * @name homeydashV3App.wallpaper
  * @description
- * # alldevices
+ * # wallpaper
  * Factory in the homeydashV3App.
  */
 angular.module('homeydashV3App')
-  .factory('alldevices', function(CONFIG, $http) {
-
+  .factory('wallpaper', function(CONFIG, $http) {
     var obj = {};
     obj = function() {
-      return $http.get('http://192.168.2.72/api/manager/devices/device/');
+      return $http.get('http://192.168.2.72/api/manager/users/user/me');
     };
 
     return obj;
-
   });

@@ -1,0 +1,20 @@
+<div flex="100">
+  <center>
+    <h2 style="font-weight:300;text-transform:uppercase;color:red;">Remove {{params.pagename}}</h2></center>
+
+  <md-content aria-label="Add new page" style="background-color:white;">
+    <center>
+      <p>You are about to delete <b>{{params.pagename}}</b>. <br/>Are you sure? </p>
+    </center>
+  </md-content>
+  <center>
+    <md-actions style="">
+      <md-button ui-sref="setup.pages.page({pagename: '{{params.pagename}}'})" class="md-raised">
+        No
+      </md-button>
+      <md-button ng-click="deletePage(getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename))" class="md-warn md-raised">
+        Yes
+      </md-button>
+    </md-actions>
+  </center>
+</div>

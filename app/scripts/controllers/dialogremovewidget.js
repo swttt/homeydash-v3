@@ -8,17 +8,18 @@
  * Controller of the homeydashV3App
  */
 angular.module('homeydashV3App')
-  .controller('DialogremovewidgetCtrl', function($scope, $rootScope, $mdToast, $mdDialog, savesettings, widgetname, pagename, widgetid) {
+  .controller('DialogremovewidgetCtrl', function($scope, $rootScope, $mdToast, $mdDialog, savesettings, widgetname, pagename, widgetid, pageid) {
 
     $scope.widgetname = widgetname;
     $scope.pagename = pagename;
     $scope.widgetid = widgetid;
+    $scope.pageid = pageid;
 
     $scope.removeWidgetDialog = function() {
       //var index = $rootScope.CONFIG.pages[pagename].indexOf(widgetname);
-      $rootScope.CONFIG.pages[pagename].widgets.splice(widgetid, 1);
+      $rootScope.CONFIG.pages[pageid].widgets.splice(widgetid, 1);
       //delete $rootScope.CONFIG.pages[pagename].widgets[widgetid];
-      console.log($rootScope.CONFIG.pages[pagename]);
+      //console.log($rootScope.CONFIG.pages[pagename]);
       savesettings.save($rootScope.CONFIG).then(function(response) {
         $mdToast.show(
           $mdToast.simple()
