@@ -1,6 +1,12 @@
 'use strict';
 
 
+
+jQuery.fn.cssNumber = function(prop) {
+  var v = parseInt(this.css(prop), 10);
+  return isNaN(v) ? 0 : v;
+};
+
 var httpconfig = {
   headers: {
     'Authorization': 'Bearer da3110b6042fae4bd73713189240fc8c797da0c7',
@@ -24,7 +30,7 @@ if (localStorage.getItem('bearer_token')) {
   createCookie('bearer_token', localStorage.getItem('bearer_token'), 7);
 }
 
-
+console.log('Bearer found! ' + localStorage.getItem('bearer_token'));
 
 function fetchData() {
   var initInjector = angular.injector(['ng', 'ngStorage']);
@@ -46,10 +52,7 @@ function fetchData() {
       localStorage.setItem('bearer_token', null);
     }
 
-    if (config.general.idletime === 'undefined') {
-      console.log('no idletime found');
-      config.general.idletime = 5;
-    }
+
 
     //$localStorage.httpHeaders = config.httpconfig;
     angular.module('homeydashV3App').constant('CONFIG', config);
@@ -62,8 +65,7 @@ function fetchData() {
       $window.location.href = 'http://192.168.2.72/manager/users/?redirect_uri=%2Fapp%2Fcom.swttt.homeydash%2F';
     }
     if (errorResponse.status === 403) {
-      delete $localStorage.httpHeaders;
-      $window.location.reload();
+      $window.location.href = 'http://192.168.2.72/manager/users/?redirect_uri=%2Fapp%2Fcom.swttt.homeydash%2F';
     }
   });
 }
@@ -93,22 +95,16 @@ angular
     'ui.router',
     'ngScrollbars',
     'ngStorage',
-    'ngIdle',
-    'ui.sortable',
     'angularInlineEdit',
     'mgo-angular-wizard',
-    'rt.debounce'
+    'rt.debounce',
+    'gridster'
   ])
 
-.config(function($mdThemingProvider, IdleProvider, KeepaliveProvider, CONFIG) {
-
-    if (CONFIG.general.idletime) {
-      IdleProvider.idle(CONFIG.general.idletime);
-    }
+  .config(function($mdThemingProvider, CONFIG) {
 
 
 
-    IdleProvider.timeout(false);
 
     $mdThemingProvider.theme('default')
       .primaryPalette('orange')
@@ -125,27 +121,31 @@ angular
 
   }])
 
-.run(function($rootScope, alldevices, CONFIG, socket, $sce, $mdDialog, Idle, wallpaper, $http) {
+  .run(function($rootScope, alldevices, CONFIG, socket, $sce, $mdDialog, wallpaper, $http) {
 
 
 
 
 
-    // Check if idle is set
-    if (CONFIG.general.idletime) {
-      Idle.watch();
-    }
+
 
     // Get current wallpaper
     wallpaper().then(function(response) {
       $rootScope.wallpaper = response.data.result.properties.wallpaper;
+      $.backstretch('http://192.168.2.72/manager/personalization/wallpapers/' + response.data.result.properties.wallpaper);
+
+    }, function(error) {
+      $.backstretch('http://192.168.2.72/manager/personalization/wallpapers/system/homey.jpg');
     });
 
     // Get settings.json and put into constant
 
     $http.get('setup.json').then(function(response) {
-      console.log(response.data);
+
       $rootScope.SETUP = response.data;
+      //console.log($rootScope.SETUP);
+    }, function(err) {
+      console.log(err);
     });
 
     // Set socket.io
@@ -315,7 +315,7 @@ angular
         }
       })
 
-    .state('setup.plugins', {
+      .state('setup.plugins', {
         url: '/plugins',
         templateUrl: 'views/setup-plugins.html',
         data: {

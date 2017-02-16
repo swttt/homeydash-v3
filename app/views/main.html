@@ -1,6 +1,6 @@
 <div ng-if="hideOverlay" class="idleoverlay"> </div>
 
-<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="localStorage.sidebarLocked" md-whiteframe="4">
+<md-sidenav style="position:fixed;" class="md-sidenav-left" md-component-id="left" md-is-locked-open="localStorage.sidebarLocked" md-whiteframe="4">
 
   <center><img src="images/logo.png" style="padding:5px;" /></center>
   <md-list id="sidebar" flex ng-scrollbars ng-scrollbars-config="config">
@@ -13,9 +13,9 @@
   </md-list>
 </md-sidenav>
 
-<md-content flex layout="row" layout-padding layout-wrap layout-align="start start" md-scroll-y style="background-color:rgba(255, 255, 255, 0);padding-top:15px;" ui-view>
+<md-content id="container" ng-class="{ 'sidebar-margin': localStorage.sidebarLocked }" flex layout="row" layout-wrap style="min-height:100%;overflow:hidden;background:none;" ui-view>
 
-  <div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
+  <!-- <div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
     <md-icon ng-if="!localStorage.sidebarLocked" ng-click="switchSidebar()" class="menu-handle">menu</md-icon>
     <h2 ng-if="!noPages" style="color:white;text-transform:uppercase;font-weight:300;"><md-icon style="color:white;">keyboard_arrow_left</md-icon> Open a page in the sidebar on the left </h2>
     <h2 ng-if="noPages" style="color:white;text-transform:uppercase;font-weight:300;">No pages found!</h2>
@@ -24,9 +24,26 @@
 
     <md-icon ng-if="!CONFIG.general.hideicon" ng-click="null" style="color:white;position:absolute;top:0px;right:10px;cursor:pointer;" ui-sref="setup">settings</md-icon>
     <md-icon onclick="location.reload();" style="color:white;position:absolute;top:0px;right:75px;cursor:pointer;">replay</md-icon>
+  </div> -->
+  <div ng-class="{ 'sidebar-margin': localStorage.sidebarLocked }" class="headerbar" flex="100" flex-xs="100" flex-xs="100" style="height:60px;max-height:60px;padding:17px;z-index:4;position:fixed;top:0;right:0;left:0;">
+    <md-icon ng-if="!localStorage.sidebarLocked" ng-click="switchSidebar()" class="menu-handle">menu</md-icon>
+    <h2 style="margin-left:15px;display:inline;color:white;text-transform:uppercase;font-weight:300;">HomeyDash </h2>
+
+    <!-- <div ng-if="gridsterOpts.draggable.enabled" class="addwidget">
+      <center>
+        <md-button class="md-raised md-secondary" style="color:rgb(255,171,64);width:150px;height:70px;font-size:18px;font-weight:200;">add widget</md-button>
+      </center>
+    </div> -->
+
+    <md-icon ng-if="!CONFIG.general.hideicon" ng-click="null" style="color:white;position:absolute;top:20px;right:10px;cursor:pointer;" ui-sref="setup">settings</md-icon>
+    <md-icon onclick="location.reload();" style="color:white;position:absolute;top:20px;right:75px;cursor:pointer;">replay</md-icon>
   </div>
 
-
-
+  <div style="margin-top:60px;padding:20px;">
+    <h2 ng-if="!noPages" style="color:white;text-transform:uppercase;font-weight:300;"><md-icon style="color:white;">keyboard_arrow_left</md-icon> Open a page in the sidebar on the left </h2>
+    <h2 ng-if="noPages" style="color:white;text-transform:uppercase;font-weight:300;">No pages found!</h2>
+    <p ng-if="noPages" style="color:white;"> Press the
+      <md-icon style="color:white;">settings</md-icon> on the top right to go to the setup.</p>
+  </div>
 
 </md-content>

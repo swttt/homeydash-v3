@@ -1,0 +1,22 @@
+<md-dialog aria-label="Add widget" style="width:70%;">
+  <md-toolbar style="background-color:rgb(255, 171, 64);">
+    <div class="md-toolbar-tools">
+      <h2 style="font-weight:300;text-transform:uppercase;color:white;">Add widget</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon style="color:white;" aria-label="Close dialog">close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <div flex="100">
+
+    <md-grid-list md-cols="5" md-gutter="10px" md-row-height="1:1" style="margin:10px;">
+      <md-grid-tile ng-repeat="type in SETUP.widgettypes" md-colspan="1" md-rowspan="1">
+        <img style="height:100%;width:100%;" ng-src="images/widgettypes/{{type.icon}}" />
+      </md-grid-tile>
+    </md-grid-list>
+
+  </div>
+
+</md-dialog>

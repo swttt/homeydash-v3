@@ -1,20 +1,26 @@
 {
-  "bearertoken": "YOUR BEARER TOKEN",
-  "homeyip": "YOUR HOMEY IP",
-  "pages": {
-    "woonkamer": {
-      "widgets": [{
-        "name": "staande lamp",
-        "capability": "onoff",
-        "deviceid": "a0b056b5-651d-42de-9f6d-f532ab6325b2"
-      }]
-    },
-    "keuken": {
-      "widgets": [{
-        "name": "Koffiezetapparaat",
-        "capability": "onoff",
-        "deviceid": "8031cd7a-614f-4dfe-a007-9bf5331ff16a"
-      }]
-    }
-  }
+  "bearertoken": "da3110b6042fae4bd73713189240fc8c797da0c7",
+  "homeyip": "192.168.2.72",
+  "general": {
+    "hidesidebar": false,
+    "defaultpage": "woonkamer",
+    "hidekwh": true
+  },
+  "pages": [{
+    "pagename": "woonkamer",
+    "widgets": [{
+      "name": "Spots Woonkamer",
+      "widgettype": "onoff",
+      "capability": ["onoff", "dim", "measure_power", "meter_power"],
+      "deviceid": "4d6b55b8-ce6e-4ad9-88fd-3be02abc6e44"
+    }]
+  }, {
+    "pagename": "keuken",
+    "widgets": [{
+      "name": "Spots Woonkamer",
+      "widgettype": "onoff",
+      "capability": ["onoff", "dim", "measure_power", "meter_power"],
+      "deviceid": "4d6b55b8-ce6e-4ad9-88fd-3be02abc6e44"
+    }]
+  }]
 }

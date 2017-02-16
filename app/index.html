@@ -1,5 +1,4 @@
-<!doctype html>
-<html>
+<html style="">
 
 <head>
   <meta charset="utf-8">
@@ -14,9 +13,10 @@
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-  <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
   <link rel="stylesheet" href="bower_components/ng-inline-edit/dist/ng-inline-edit.css" />
   <link rel="stylesheet" href="bower_components/angular-wizard/dist/angular-wizard.min.css" />
+  <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.css" />
+  <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -24,20 +24,24 @@
   <!-- endbuild -->
   <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+
+
+
 </head>
 
-<body ng-controller="MainCtrl" ng-cloak>
+<body ng-controller="MainCtrl" style="">
 
   <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
   <!-- Add your site or application content here -->
-  <div style="background-image: url(http://192.168.2.72/manager/personalization/wallpapers/{{wallpaper || 'system/homey.jpg'}});" class="bg" layout="row" layout-fill ui-view>
+  <!-- <div layout="row" style="overflow:auto;height:100%;" class="bg" layout-fill  ng-cloak>
 
-
-
+  </div> -->
+  <div style="" ng-cloak ui-view>
   </div>
+
 
   <script src="http://192.168.2.72/socket.io/socket.io.js"></script>
 
@@ -52,19 +56,19 @@
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/angular-material/angular-material.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
-  <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
-  <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
   <script src="bower_components/ngstorage/ngStorage.js"></script>
-  <script src="bower_components/ng-idle/angular-idle.js"></script>
-  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-  <script src="bower_components/angular-ui-sortable/sortable.js"></script>
   <script src="bower_components/ng-inline-edit/dist/ng-inline-edit.js"></script>
   <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
   <script src="bower_components/angular-debounce/dist/angular-debounce.js"></script>
+  <script src="bower_components/javascript-detect-element-resize/detect-element-resize.js"></script>
+  <script src="bower_components/angular-gridster/src/angular-gridster.js"></script>
+  <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+  <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+  <script src="bower_components/jquery-backstretch/jquery.backstretch.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/main.js"></script>
@@ -80,6 +84,8 @@
   <script src="scripts/controllers/agreement.js"></script>
   <!-- endbuild -->
 
+  <script>
+  </script>
 
 </body>
 

@@ -8,7 +8,42 @@
  * Controller of the homeydashV3App
  */
 angular.module('homeydashV3App')
-  .controller('DevicesCtrl', function($scope, $rootScope, $mdToast, device, alldevices, debounce) {
+  .controller('DevicesCtrl', function($scope, $rootScope, $mdToast, device, alldevices, debounce, savesettings, $mdDialog) {
+    // Delete widget
+    $scope.removeWidget = function(widgetid, widget, params) {
+      //var index = $rootScope.CONFIG.pages[pagename].indexOf(widgetname);
+      //console.log(widget);
+
+      //delete $rootScope.CONFIG.pages[pagename].widgets[widgetid];
+
+      // Appending dialog to document.body to cover sidenav in docs app
+      var confirm = $mdDialog.confirm()
+        .title('Delete widget')
+        .textContent('Are you sure you want to delete ' + widget.name + '?')
+        .ariaLabel('Delete widget')
+        .ok('Yes')
+        .cancel('No');
+
+      $mdDialog.show(confirm).then(function() {
+        // Delete widget
+        $rootScope.CONFIG.pages[$scope.getIdbyAtrr($rootScope.CONFIG.pages, 'pagename', params.pagename)].widgets.splice(widgetid, 1);
+        savesettings.save($rootScope.CONFIG).then(function(response) {
+
+        }, function(error) {
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent('ERROR: ' + error)
+            .position('top right')
+          );
+        });
+      }, function() {
+        // Don't delete
+      });
+
+
+
+    };
+
 
     // ON OFF Control
     $scope.onoff = function(currentId, cmd) {

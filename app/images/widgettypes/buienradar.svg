@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640px" height="640px" viewBox="0 0 640 640" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Buienradar</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Buienradar">
+            <rect id="Rectangle" fill="#EAEAEA" x="0" y="0" width="640" height="640"></rect>
+            <text id="BUIENRADAR" font-family="Roboto-Light, Roboto" font-size="50" font-weight="300" fill="#FFAB40">
+                <tspan x="171.049316" y="602">BUIENRADAR</tspan>
+            </text>
+            <g transform="translate(133.000000, 78.000000)" id="Layer_1">
+                <g>
+                    <g id="Group">
+                        <g id="Shape">
+                            <g opacity="0.763134058" transform="translate(0.000000, 23.316617)" fill="#FFAB40">
+                                <path d="M105.472039,342.835799 C127.587528,352.783844 152.05685,358.342003 177.843615,358.342003 C276.037087,358.342003 355.64582,278.13811 355.64582,179.188703 C355.64582,147.114226 347.249312,117.039979 332.599338,91.0015926 L105.472039,342.835799 Z"></path>
+                                <path d="M267.904068,24.7108001 C241.48493,9.02758456 210.744576,0.0177011462 177.861181,0.0177011462 C79.6677082,0.0177011462 0.0589751127,80.2215945 0.0589751127,179.188703 C0.0589751127,201.651457 4.18696546,223.122948 11.6876118,242.948231 L267.904068,24.7108001 Z"></path>
+                            </g>
+                            <path d="M74.1168786,350.557706 L374.634576,0.00420729671 L21.085377,297.525072 C10.6336568,304.428519 3.67755389,316.305989 3.67755389,329.794262 C3.67755389,351.106442 20.8043224,368.347358 41.9185538,368.347358 C51.5095442,368.347358 60.2573706,364.771727 66.9675506,358.877245 C69.7253995,356.469889 72.13193,353.655407 74.1168786,350.557706 Z" fill-opacity="0.264407835" fill="#F6A623"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

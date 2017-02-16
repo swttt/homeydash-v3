@@ -12,15 +12,7 @@
     </md-select>
   </md-list-item>
 
-  <md-list-item>
-    <p>Set dashboard screen dimming time <small><b>(requires page refresh)</b></small></p>
-    <md-select class="md-secondary" ng-change="saveSettings()" ng-model="CONFIG.general.idletime">
-      <md-option ng-value="0">Disable</md-option>
-      <md-option ng-repeat="value in SETUP.dimmingvalues" ng-value="value">
-        {{value}} sec
-      </md-option>
-    </md-select>
-  </md-list-item>
+
 
 
 
