@@ -28,7 +28,39 @@
   <md-icon onclick="location.reload();" style="color:white;position:absolute;top:20px;right:75px;cursor:pointer;">replay</md-icon>
   <md-icon ng-if="!gridsterOpts.draggable.enabled" ng-click="switchEdit()" style="color:white;position:absolute;top:20px;right:140px;cursor:pointer;" class="hide-xs">edit</md-icon>
   <md-icon ng-if="gridsterOpts.draggable.enabled" ng-click="switchEdit()" style="color:rgb(255, 92, 0);position:absolute;top:20px;right:140px;cursor:pointer;" class="hide-xs">check_circle</md-icon>
-  <md-icon ng-if="gridsterOpts.draggable.enabled" ng-click="addWidget()" style="color:rgb(255,171,64);position:absolute;top:20px;right:205px;cursor:pointer;">add_circle</md-icon>
+  <!-- <md-icon ng-if="gridsterOpts.draggable.enabled" ng-click="addWidget()" style="color:rgb(255,171,64);position:absolute;top:20px;right:205px;cursor:pointer;">add_circle</md-icon> -->
+  <md-menu md-position-mode="target-right target" ng-if="gridsterOpts.draggable.enabled" style="position:absolute;top:20px;right:205px;cursor:pointer;">
+    <!-- Trigger element is a md-button with an icon -->
+
+    <md-icon ng-click="$mdMenu.open($event)" style="color:rgb(255,171,64);">add_circle</md-icon>
+
+    <md-menu-content>
+      <md-menu-item ng-repeat="type in SETUP.widgettypes">
+
+        <md-button ng-click="openAddwidgetDialog(type.type)"><img style="width:42px;height:42px;display:inline;vertical-align:middle;" ng-src="images/widgettypes/{{type.icon}}" /><span style="margin-left:5px;line-height:42px;font-size:14px;vertical-align:middle;text-transform:uppercase;font-weight:300;">{{type.name}}</span></md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+
+  <md-menu md-position-mode="target-right target" ng-if="gridsterOpts.draggable.enabled" style="position:absolute;top:20px;right:275px;cursor:pointer;">
+    <!-- Trigger element is a md-button with an icon -->
+
+    <md-icon ng-click="$mdMenu.open($event)" style="color:rgb(255,171,64);">chrome_reader_mode</md-icon>
+
+    <md-menu-content>
+      <md-menu-item ng-repeat="page in CONFIG.pages">
+        <span style="margin:5px;font-weight:300;text-transform:uppercase;">{{page.pagename}}</span>
+      </md-menu-item>
+
+      <md-divider></md-divider>
+      <md-menu-item style="padding:10px;">
+        <md-button style="text-align:center;" class="md-primary md-raised">
+          ADD PAGE
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+
 </div>
 <!-- <md-toolbar style="position:fixed;z-index:20;">
 

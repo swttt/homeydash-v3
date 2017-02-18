@@ -17,13 +17,13 @@
     "description": "Temperature Sensor"
   }],
   "widgettypes": [{
-      "type": "Device",
+      "type": "homeydevices",
       "name": "Homey Devices",
       "description": "Homey device control widget",
       "icon": "homeydevice.svg"
     },
     {
-      "type": "Buienradar",
+      "type": "buienradar",
       "name": "Buienradar",
       "description": "Show Buienradar map",
       "icon": "buienradar.svg"

@@ -24,6 +24,9 @@ angular.module('homeydashV3App')
     // Hide overlay on start (used for dimming)
     $scope.hideOverlay = false;
 
+    // Set newwidget var
+    $scope.newWidget = {};
+
     // Set sidebar check for edit mode
     var sidebarLocked;
 
@@ -39,6 +42,8 @@ angular.module('homeydashV3App')
     $scope.bodyscroll = {
       autoHideScrollbar: true,
       theme: 'minimal-dark',
+      setHeight: '100%',
+      setWidth: '100%',
       scrollInertia: 300,
       advanced: {
         updateOnContentResize: true
@@ -79,8 +84,8 @@ angular.module('homeydashV3App')
           var offsetCorrect = offsetfromTop + 165;
 
           // if (offsetCorrect > $('body').height()) {
-          //   var scrollTo = $('#mCSB_5_container').cssNumber("top") - 40;
-          //   $('#mCSB_5_container').css("top", scrollTo);
+          //   var scrollTo = $('#mCSB_5_container').cssNumber('top') - 40;
+          //   $('#mCSB_5_container').css('top', scrollTo);
           //   console.log('scrolled to' + scrollTo);
           // }
 
@@ -185,18 +190,36 @@ angular.module('homeydashV3App')
 
 
     // Open add widget dialog
-    $scope.addWidget = function() {
+    $scope.openAddwidgetDialog = function(widgettype) {
 
       $mdDialog.show({
         scope: $scope,
         preserveScope: true,
-        templateUrl: 'views/dialog-addwidget.html',
+        templateUrl: 'views/addwidget-dialogs/' + widgettype + '.html',
         parent: angular.element(document.body),
         clickOutsideToClose: true
       });
+
     };
 
+    $scope.closeDialog = function() {
+      $mdDialog.hide();
+      $scope.newWidget = {};
+    };
 
+    $scope.saveWidget = function(pageid) {
+      $rootScope.CONFIG.pages[pageid].widgets.push({
+        'name': $scope.newWidget.device.name,
+        'widgettype': $scope.newWidget.capability.capability,
+        'capability': Object.keys($rootScope.devicelist[$scope.newWidget.device.id].capabilities),
+        'deviceid': $scope.newWidget.device.id,
+        'class': $scope.newWidget.capability.class
+      });
+      savesettings.save($rootScope.CONFIG).then(function() {
+        $scope.closeDialog();
+        console.log('New settings saved!');
+      });
+    };
 
 
   });

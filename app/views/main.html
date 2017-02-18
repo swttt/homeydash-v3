@@ -13,7 +13,7 @@
   </md-list>
 </md-sidenav>
 
-<md-content id="container" ng-class="{ 'sidebar-margin': localStorage.sidebarLocked }" flex layout="row" layout-wrap style="min-height:100%;overflow:hidden;background:none;" ui-view>
+<md-content id="container" ng-class="{ 'sidebar-margin': localStorage.sidebarLocked }" flex layout="row" layout-wrap style="min-height:100%;overflow:hidden;background:none;-webkit-overflow-scrolling: touch;" ui-view>
 
   <!-- <div layout-padding flex="100" flex-xs="100" flex-xs="100" style="position:relative;">
     <md-icon ng-if="!localStorage.sidebarLocked" ng-click="switchSidebar()" class="menu-handle">menu</md-icon>
