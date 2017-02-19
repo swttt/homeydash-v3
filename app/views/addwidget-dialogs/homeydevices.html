@@ -1,13 +1,5 @@
 <md-dialog aria-label="Add widget" style="width:50%;">
-  <md-toolbar style="background-color:rgb(255, 171, 64);">
-    <div class="md-toolbar-tools">
-      <h2 style="font-weight:300;text-transform:uppercase;color:white;">Add widget to {{params.pagename}}</h2>
-      <span flex></span>
-      <md-button class="md-icon-button" ng-click="closeDialog()">
-        <md-icon style="color:white;" aria-label="Close dialog">close</md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
+
 
   <md-content style="margin:10px;">
     <div flex="100">
@@ -29,9 +21,7 @@
           <!-- <md-button class="md-raised md-primary " ng-click="newWidget.capability = null;" ui-sref="setup.pages.addwidget({
               pagename: params.pagename
             })"> Back </md-button> -->
-          <!-- <md-button class="md-raised md-warn " ng-click="newWidget = null;" ui-sref="setup.pages.page({
-              pagename: params.pagename
-            })"> Cancel </md-button> -->
+          <md-button class="md-raised md-warn " ng-click="closeDialog()"> Cancel </md-button>
           <md-button ng-disabled="!newWidget.capability" class="md-raised md-primary " wz-next> Next </md-button>
 
 
@@ -54,9 +44,7 @@
           <br/>
           <div style="width:100%;text-align:center;">
             <md-button class="md-raised md-primary " ng-click="newWidget.device = null;" wz-previous> Back </md-button>
-            <!-- <md-button class="md-raised md-warn " ng-click="newWidget = null;" ui-sref="setup.pages.page({
-            pagename: params.pagename
-          })"> Cancel </md-button> -->
+            <md-button class="md-raised md-warn " ng-click="closeDialog()"> Cancel </md-button>
             <md-button ng-disabled="!newWidget.device" class="md-raised md-primary " wz-next> Next </md-button>
           </div>
         </wz-step>
@@ -74,9 +62,7 @@
           </div>
 
           <md-button class="md-raised md-primary " wz-previous> Back </md-button>
-          <!-- <md-button class="md-raised md-warn " ng-click="newWidget = null;" ui-sref="setup.pages.page({
-            pagename: params.pagename
-          })"> Cancel </md-button> -->
+          <md-button class="md-raised md-warn " ng-click="closeDialog()"> Cancel </md-button>
           <md-button class="md-raised md-primary " wz-finish> Save </md-button>
         </wz-step>
       </wizard>

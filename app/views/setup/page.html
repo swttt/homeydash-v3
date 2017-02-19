@@ -1,0 +1,14 @@
+<div style="width:100%;background:none;margin-top:-10px;height:100%;" gridster="gridsterOptsSettings">
+
+  <!-- <widget gridster-item style="overflow:hidden;" size-x="1" size-y="2">
+    <img class="md-whiteframe-3dp" border="0" src="http://api.buienradar.nl/image/1.0/RadarMapNL" style="width:auto;height:100%;min-width:100%;">
+  </widget> -->
+
+
+
+  <widget gridster-item="widget" ng-repeat="widget in CONFIG.pages[getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename)].widgets" ng-include src="'views/setup/widget.html'" ng-controller="DevicesCtrl" widget="widget.widgettype">
+  </widget>
+
+
+
+</div>

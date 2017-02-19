@@ -10,45 +10,41 @@
 angular.module('homeydashV3App')
   .controller('MainCtrl', function($element, savesettings, $localStorage, $mdSidenav, $window, $scope, $stateParams, device, socket, alldevices, $rootScope, CONFIG, $mdDialog) {
 
-
-
     // Add params to scope
     $scope.params = $stateParams;
-
-    // Set editMode false on start
-    $scope.editMode = false;
-
     // Add localstorage to scope
     $scope.localStorage = $localStorage;
-
     // Hide overlay on start (used for dimming)
     $scope.hideOverlay = false;
 
-    // Set newwidget var
-    $scope.newWidget = {};
 
     // Set sidebar check for edit mode
     var sidebarLocked;
 
 
+    // !! SET HOMEYDASH WIDE !!
     // Function to save settings
     $scope.saveSettings = function() {
       savesettings.save($rootScope.CONFIG);
       console.log('New settings saved!');
     };
+    // If agreement never is accepted show it again
+    if (!localStorage.getItem('agreement')) {
+      $mdDialog.show({
+          templateUrl: 'views/dialogs/agreement.html',
+          clickOutsideToClose: false,
+          fullscreen: true,
+          controller: 'AgreementCtrl',
+          hasBackdrop: false,
+          escapeToClose: false
+        })
+        .then(function() {
+          localStorage.setItem('agreement', true);
+        });
+
+    }
 
 
-    // Body scroller settings (mostly needed for iOS scrolling in gridster mobile mode)
-    $scope.bodyscroll = {
-      autoHideScrollbar: true,
-      theme: 'minimal-dark',
-      setHeight: '100%',
-      setWidth: '100%',
-      scrollInertia: 300,
-      advanced: {
-        updateOnContentResize: true
-      }
-    };
 
 
 
@@ -73,58 +69,17 @@ angular.module('homeydashV3App')
         scrollSensitivity: 60,
         scrollSpeed: 5,
         //  handle: '.draghandle',
-        start: function(event, $element, widget) {}, //
-        drag: function(event, $element, widget) {
-          //console.log($element);
-
-          var divHeight = $('#mCSB_5_container').height();
-          var gridTop = $('#mCSB_5_container').cssNumber('top');
-          var itemTop = $element[0].offsetTop;
-          var offsetfromTop = itemTop + gridTop;
-          var offsetCorrect = offsetfromTop + 165;
-
-          // if (offsetCorrect > $('body').height()) {
-          //   var scrollTo = $('#mCSB_5_container').cssNumber('top') - 40;
-          //   $('#mCSB_5_container').css('top', scrollTo);
-          //   console.log('scrolled to' + scrollTo);
-          // }
-
-        },
-        stop: function(event, $element, widget) {
-          $scope.saveSettings();
-        }
+        start: function(event, $element, widget) {},
+        drag: function(event, $element, widget) {},
+        stop: function(event, $element, widget) {}
       }
 
     };
 
 
-    // Function to switch edit mode
-    $scope.switchEdit = function() {
-      if ($scope.editMode) {
-        $scope.gridsterOpts.draggable.enabled = false;
-        $scope.editMode = false;
-      } else if (!$scope.editMode) {
-        $scope.editMode = true;
-        $scope.gridsterOpts.draggable.enabled = true;
-      }
-    };
 
 
-    // If agreement never is accepted show it again
-    if (!localStorage.getItem('agreement')) {
-      $mdDialog.show({
-          templateUrl: 'views/agreement.html',
-          clickOutsideToClose: false,
-          fullscreen: true,
-          controller: 'AgreementCtrl',
-          hasBackdrop: false,
-          escapeToClose: false
-        })
-        .then(function() {
-          localStorage.setItem('agreement', true);
-        });
 
-    }
 
 
 
@@ -189,37 +144,7 @@ angular.module('homeydashV3App')
     });
 
 
-    // Open add widget dialog
-    $scope.openAddwidgetDialog = function(widgettype) {
 
-      $mdDialog.show({
-        scope: $scope,
-        preserveScope: true,
-        templateUrl: 'views/addwidget-dialogs/' + widgettype + '.html',
-        parent: angular.element(document.body),
-        clickOutsideToClose: true
-      });
-
-    };
-
-    $scope.closeDialog = function() {
-      $mdDialog.hide();
-      $scope.newWidget = {};
-    };
-
-    $scope.saveWidget = function(pageid) {
-      $rootScope.CONFIG.pages[pageid].widgets.push({
-        'name': $scope.newWidget.device.name,
-        'widgettype': $scope.newWidget.capability.capability,
-        'capability': Object.keys($rootScope.devicelist[$scope.newWidget.device.id].capabilities),
-        'deviceid': $scope.newWidget.device.id,
-        'class': $scope.newWidget.capability.class
-      });
-      savesettings.save($rootScope.CONFIG).then(function() {
-        $scope.closeDialog();
-        console.log('New settings saved!');
-      });
-    };
 
 
   });

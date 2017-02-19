@@ -1,4 +1,4 @@
-<div style="width:100%;height:100%;" layout="row" layout-wrap layout-align="center center" ng-controller="SetupCtrl">
+<!-- <div style="width:100%;height:100%;" layout="row" layout-wrap layout-align="center center" ng-controller="SetupCtrl">
   <md-card flex="90" style="height:90%;">
 
     <md-tabs md-stretch-tabs="always" style="background-color:rgba(82, 82, 82, 0.1)" md-selected="currentTab">
@@ -13,4 +13,121 @@
       <md-button ui-sref="main">Back to the dashboard</md-button>
     </md-card-footer>
   </md-card>
+</div> -->
+
+<md-toolbar style="background-color:rgba(62, 62, 62, 0.69);position: fixed;z-index:3;">
+  <div class="md-toolbar-tools">
+
+    <h2 style="margin-left:15px;display:inline;color:white;text-transform:uppercase;font-weight:300;" flex md-truncate>Settings</h2>
+
+    <!-- <md-button class="md-icon-button" aria-label="Favorite">
+      <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
+    </md-button>
+
+    <md-button class="md-icon-button" aria-label="More">
+      <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+    </md-button> -->
+
+    <md-menu ng-if="'setup.page' | isState" md-position-mode="target-right target" style="cursor:pointer;margin-right:10px;">
+
+      <md-button style="color:white;" ng-click="$mdMenu.open($event)">
+        <md-icon style="color:white;">add</md-icon>
+        add widget
+      </md-button>
+
+      <md-menu-content>
+        <md-menu-item ng-repeat="type in SETUP.widgettypes">
+
+          <md-button ng-click="openAddwidgetDialog(type.type)"><img style="width:42px;height:42px;display:inline;vertical-align:middle;" ng-src="images/widgettypes/{{type.icon}}" /><span style="margin-left:5px;line-height:42px;font-size:14px;vertical-align:middle;text-transform:uppercase;font-weight:300;">{{type.name}}</span></md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+
+    <md-menu ng-if="'setup.page' | isState" md-position-mode="target-right target" style="cursor:pointer;margin-right:10px;">
+
+      <md-button style="color:white;margin-right:10px;" ng-click="$mdMenu.open($event)">
+        <md-icon style="color:white;">arrow_drop_down</md-icon>
+        edit page
+      </md-button>
+
+      <md-menu-content>
+        <md-menu-item>
+          <md-button style="font-weight:300;text-transform:uppercase;" ng-click="openRenamepageDialog()">
+            <md-icon class="">edit</md-icon>
+            Rename page
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button class="md-warn" style="font-weight:300;text-transform:uppercase;" ng-click="confirmPageDelete()">
+            <md-icon class="md-warn">delete</md-icon>
+            Remove page
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+    <md-menu md-position-mode="target-right target" style="cursor:pointer;margin-right:10px;">
+
+      <md-button class="md-primary" style="margin-right:10px;" ng-click="$mdMenu.open($event)">
+        <md-icon style="">arrow_drop_down</md-icon>
+        settings
+      </md-button>
+
+      <md-menu-content>
+        <md-menu-item>
+          <md-button style="font-weight:300;text-transform:uppercase;" ui-sref="setup.generalsettings">
+            <md-icon>settings</md-icon>
+            General settings
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button style="font-weight:300;text-transform:uppercase;" ng-click="null">
+            <md-icon>extension</md-icon>
+            plugins
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button style="font-weight:300;text-transform:uppercase;" ui-sref="main">
+            <md-icon class="">dashboard</md-icon>
+            back to dashboard
+          </md-button>
+        </md-menu-item>
+
+      </md-menu-content>
+    </md-menu>
+
+  </div>
+</md-toolbar>
+
+<!-- <div ng-class="{ 'sidebar-margin': localStorage.sidebarLocked }" class="headerbar" flex="100" flex-xs="100" flex-xs="100" style="height:60px;max-height:60px;padding:17px;z-index:4;position:fixed;top:0;right:0;left:0;">
+  <h2 style="margin-left:15px;display:inline;color:white;text-transform:uppercase;font-weight:300;">Settings</h2>
+</div> -->
+
+<div flex="100" layout="row" layout-wrap style="padding-top:74px;">
+  <div flex="20" style="padding:10px;">
+    <md-list style="background-color:white;" class="md-dense" ui-sortable="sortableOptionsPages" ng-model="CONFIG.pages">
+      <md-list-item ng-repeat="page in CONFIG.pages" ui-sref-active="active" style="margin-left:7px;margin-right:7px;" class="md-2-line" ui-sref="setup.page({pagename: '{{page.pagename}}'})">
+        <div class="md-list-item-text">
+          <h3>{{page.pagename}}</h3>
+          <p>{{page.widgets.length || '0'}} widgets</p>
+        </div>
+        <div style="cursor:move;z-index:2;" class="md-secondary orderPages">
+          <md-icon>reorder</md-icon>
+        </div>
+      </md-list-item>
+      <md-divider></md-divider>
+      <md-list-item style="">
+        <md-button ng-click="openAddpageDialog()" class="md-primary" style="width:100%;">
+          Add page
+        </md-button>
+      </md-list-item>
+    </md-list>
+  </div>
+
+  <div flex="80" style="" ui-view>
+    <div style="background-color:rgba(255,255,255,1);padding:10px;margin-top:10px;margin-right:10px;">
+      <h3 style="font-weight:300;width:100%;text-align:center;color:black;">Select a page on the left side to edit.</h3>
+    </div>
+  </div>
 </div>

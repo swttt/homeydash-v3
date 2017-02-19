@@ -21,6 +21,11 @@ angular.module('homeydashV3App')
         'dim': dimValue
       });
     };
+    obj.button = function(currentId) {
+      return $http.put('http://192.168.2.72/api/manager/devices/device/' + currentId + '/state', {
+        'button': null
+      });
+    };
     return obj;
 
   });

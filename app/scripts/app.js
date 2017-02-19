@@ -95,55 +95,39 @@ angular
     'ui.router',
     'ngScrollbars',
     'ngStorage',
-    'angularInlineEdit',
     'mgo-angular-wizard',
     'rt.debounce',
-    'gridster'
+    'gridster',
+    'ui.sortable'
   ])
 
-  .config(function($mdThemingProvider, CONFIG) {
-
-
-
-
-    $mdThemingProvider.theme('default')
-      .primaryPalette('orange')
-      .accentPalette('orange');
-
-
-
-
-
-  })
+  // Only used for LOCAL!
   .run(['$http', function($http) {
     $http.defaults.headers.common['Authorization'] = 'Bearer da3110b6042fae4bd73713189240fc8c797da0c7';
     $http.defaults.headers.common['Content-Type'] = 'application/json';
 
   }])
 
-  .run(function($rootScope, alldevices, CONFIG, socket, $sce, $mdDialog, wallpaper, $http) {
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('orange')
+      .accentPalette('orange');
+  })
 
 
 
-
-
-
-
+  .run(function($rootScope, alldevices, CONFIG, socket, wallpaper, $http) {
     // Get current wallpaper
     wallpaper().then(function(response) {
       $rootScope.wallpaper = response.data.result.properties.wallpaper;
       $.backstretch('http://192.168.2.72/manager/personalization/wallpapers/' + response.data.result.properties.wallpaper);
-
     }, function(error) {
       $.backstretch('http://192.168.2.72/manager/personalization/wallpapers/system/homey.jpg');
     });
 
-    // Get settings.json and put into constant
-
+    // Get settings.json and put into rootScope
     $http.get('setup.json').then(function(response) {
-
       $rootScope.SETUP = response.data;
-      //console.log($rootScope.SETUP);
     }, function(err) {
       console.log(err);
     });
@@ -156,7 +140,6 @@ angular
         angular.forEach(pagesvalue.widgets, function(widgetsvalue) {
           angular.forEach(widgetsvalue.capability, function(capabilityvalue) {
             socket.on(capabilityvalue, widgetsvalue.deviceid, function(data) {
-              console.log(data);
               $rootScope.devicelist[widgetsvalue.deviceid].state[capabilityvalue] = data;
               $rootScope.$apply();
             });
@@ -164,19 +147,11 @@ angular
         });
       });
     });
-
-
-
-
-
-
   })
   .run(['$rootScope', '$state', '$localStorage', function($rootScope, $state, $localStorage) {
     if (!$localStorage.defaultPage) {
       $localStorage.defaultPage = false;
     }
-
-
     $rootScope.$on('$stateChangeStart', function(evt, to, params) {
       if (to.redirectTo) {
         evt.preventDefault();
@@ -184,7 +159,6 @@ angular
           location: 'replace'
         });
       }
-
       if (to.name === 'main.page') {
 
         if (!$rootScope.CONFIG.pages.filter(function(e) {
@@ -195,39 +169,16 @@ angular
           $state.go('main');
         }
       }
-      if (to.name === 'setup.pages.page') {
+      if (to.name === 'setup.page') {
 
         if (!$rootScope.CONFIG.pages.filter(function(e) {
             return e.pagename === params.pagename;
           }).length) {
           evt.preventDefault();
           console.log('Page not found!');
-          $state.go('setup.pages');
+          $state.go('setup');
         }
       }
-
-      if (to.name === 'setup.pages.removepage') {
-
-        if (!$rootScope.CONFIG.pages.filter(function(e) {
-            return e.pagename === params.pagename;
-          }).length) {
-          evt.preventDefault();
-          console.log('Page not found!');
-          $state.go('setup.pages');
-        }
-      }
-
-      if (to.name === 'setup.pages.addwidget') {
-
-        if (!$rootScope.CONFIG.pages.filter(function(e) {
-            return e.pagename === params.pagename;
-          }).length) {
-          evt.preventDefault();
-          console.log('Page not found!');
-          $state.go('setup.pages');
-        }
-      }
-
       if (to.name === 'main') {
         if ($localStorage.defaultPage && $rootScope.CONFIG.pages.filter(function(e) {
             return e.pagename === $localStorage.defaultPage;
@@ -241,13 +192,6 @@ angular
           });
         }
       }
-
-
-      if (to.name === 'setup.pages.addwidgettype') {
-        to.templateUrl = 'views/setup-addwidget-' + params.type.toLowerCase() + '.html';
-      }
-
-
     });
   }])
   .config(function($stateProvider, $urlRouterProvider) {
@@ -255,79 +199,28 @@ angular
 
     $stateProvider
       .state('setup', {
-        url: '/setup',
+        url: '/settings',
         templateUrl: 'views/setup.html',
-        redirectTo: 'setup.general',
+        controller: 'SetupCtrl'
       })
-      .state('setup.general', {
+      .state('setup.generalsettings', {
         url: '/general',
-        templateUrl: 'views/setup-general.html',
-        data: {
-          'selectedTab': 0
-        }
+        templateUrl: 'views/setup/generalsettings.html'
       })
-      .state('setup.pages', {
-        url: '/pages',
-        templateUrl: 'views/setup-pages.html',
-        data: {
-          'selectedTab': 1
-        }
-      })
-      .state('setup.pages.newpage', {
-        url: '/new',
-        templateUrl: 'views/setup-newpage.html',
-        data: {
-          'selectedTab': 1
-        }
-      })
-      .state('setup.pages.removepage', {
-        url: '/:pagename/remove/',
-        templateUrl: 'views/setup-removepage.html',
-        data: {
-          'selectedTab': 1
-        }
-      })
-      .state('setup.pages.page', {
+      .state('setup.page', {
         url: '/:pagename',
-        templateUrl: 'views/setup-widgetsview.html',
-        data: {
-          'selectedTab': 1
-        }
+        templateUrl: 'views/setup/page.html'
       })
-      .state('setup.pages.removewidget', {
-        url: '/:pagename/remove-widget/:widgetid/:widgetname',
-        templateUrl: 'views/setup-removewidget.html',
-        data: {
-          'selectedTab': 1
-        }
-      })
-      .state('setup.pages.addwidget', {
-        url: '/:pagename/add-widget',
-        templateUrl: 'views/setup-addwidget.html',
-        data: {
-          'selectedTab': 1
-        }
-      })
-      .state('setup.pages.addwidgettype', {
-        url: '/:pagename/add-widget/:type',
-        data: {
-          'selectedTab': 1
-        }
-      })
-
       .state('setup.plugins', {
         url: '/plugins',
-        templateUrl: 'views/setup-plugins.html',
-        data: {
-          'selectedTab': 2
-        }
+        templateUrl: 'views/setup-plugins.html'
       })
       .state('main', {
         url: '/',
         templateUrl: 'views/main.html'
       })
       .state('main.page', {
-        url: 'page/:pagename',
+        url: ':pagename',
         templateUrl: 'views/device-page.html'
       });
 

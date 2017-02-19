@@ -44,6 +44,21 @@ angular.module('homeydashV3App')
 
     };
 
+    // Button Control
+    $scope.button = function(currentId) {
+      device.button(currentId).then(function(response) {
+
+      }, function(error) {
+        if (error) {
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent('ERROR: ' + error.statusText)
+            .position('top right')
+            .hideDelay(3000)
+          );
+        };
+      });
+    };
 
     // ON OFF Control
     $scope.onoff = function(currentId, cmd) {

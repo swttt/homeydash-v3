@@ -1,0 +1,21 @@
+<md-content class="md-whiteframe-3dp" layout="row" layout-wrap style="height:100%;padding:0;margin:0;background-color:white;">
+
+
+  <md-list flex="100" style="padding:0;margin:0;">
+    <md-list-item class="md-2-line" style="padding:0;margin:0;">
+      <img ng-click="onoff(widget.deviceid, devicelist[widget.deviceid].state.onoff)" ng-if="devicelist[widget.deviceid].state.onoff" ng-src="images/icons/{{widget.class}}_on.png" class="md-avatar" alt="icon" />
+      <img ng-click="onoff(widget.deviceid, devicelist[widget.deviceid].state.onoff)" ng-if="!devicelist[widget.deviceid].state.onoff" ng-src="images/icons/{{widget.class}}_off.png" class="md-avatar" alt="icon" />
+      <div class="md-list-item-text" layout="column" style="margin-botton:0px;">
+        <h3>{{devicelist[widget.deviceid].name}}</h3>
+        <h4 ng-if="!CONFIG.general.hidezonename">{{devicelist[widget.deviceid].zone.name}}</h4>
+      </div>
+    </md-list-item>
+  </md-list>
+  <div flex="100" layout-align="center start" style="margin:0px 20px 0px 20px;">
+
+
+    <md-slider style="margin:0 auto;" ng-change="dim(widget.deviceid, devicelist[widget.deviceid].state.dim);" ng-model="devicelist[widget.deviceid].state.dim" flex min="0" step="0.01" max="1" aria-label="dim">
+    </md-slider>
+
+  </div>
+</md-content>

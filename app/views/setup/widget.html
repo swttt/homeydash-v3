@@ -1,0 +1,24 @@
+<div style="min-height:100%;height:100%;cursor:move;">
+  <md-content class="md-whiteframe-3dp" layout="row" layout-wrap style="height:100%;padding:0;margin:0;background-color:rgba(255,255,255,1);">
+
+
+    <md-list flex="100" style="padding:0;margin:0;">
+      <md-list-item class="md-2-line" style="padding:0;margin:0;">
+
+        <img ng-src="images/icons/{{widget.class}}_on.png" class="md-avatar" alt="icon" />
+        <div class="md-list-item-text" layout="column" style="margin-botton:0px;">
+          <h3>{{devicelist[widget.deviceid].name}}</h3>
+          <h4 ng-if="!CONFIG.general.hidezonename">{{devicelist[widget.deviceid].zone.name}}</h4>
+        </div>
+      </md-list-item>
+    </md-list>
+    <div flex="100" layout-align="center start" style="margin:0px 20px 0px 20px;">
+
+
+      <md-button ng-click="removeWidget($index, widget, params)" class="md-warn md-mini" style="min-width:100px;max-width:100px;width:100px;height:20px;position:absolute;top:70%;left:50%;margin: -20px -50px; " aria-label="Remove">
+        Delete
+      </md-button>
+
+    </div>
+  </md-content>
+</div>
