@@ -135,6 +135,12 @@ angular.module('homeydashV3App')
       scrollInertia: 0
     };
 
+    // Body scroll config
+    $scope.bodyconfig = {
+      autoHideScrollbar: true,
+      theme: 'minimal-dark'
+    };
+
     // Update devicelist on state change
     $rootScope.$on('$stateChangeStart', function() {
       alldevices().then(function(response) {

@@ -43,19 +43,20 @@
 
 </md-toolbar> -->
 
+<div ng-scrollbars ng-scrollbars-config="bodyconfig" style="width:100%;">
+  <md-content style="background:none;margin:10px;margin-top:60px;" gridster="gridsterOpts">
 
-<md-content id="grid" style="width:100%;background:none;margin:10px;margin-top:60px;" gridster="gridsterOpts">
-
-  <!-- <widget gridster-item style="overflow:hidden;" size-x="1" size-y="2">
+    <!-- <widget gridster-item style="overflow:hidden;" size-x="1" size-y="2">
     <img class="md-whiteframe-3dp" border="0" src="http://api.buienradar.nl/image/1.0/RadarMapNL" style="width:auto;height:100%;min-width:100%;">
   </widget> -->
 
 
 
-  <widget id="griditem" gridster-item="widget" ng-repeat="widget in CONFIG.pages[getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename)].widgets track by $index" ng-include src="'views/widgets/' + widget.widgettype + '.html'" ng-controller="DevicesCtrl"
-      widget="widget.widgettype">
-    </widget>
+    <widget id="griditem" gridster-item="widget" ng-repeat="widget in CONFIG.pages[getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename)].widgets track by $index" ng-include src="'views/widgets/' + widget.widgettype + '.html'" ng-controller="DevicesCtrl"
+        widget="widget.widgettype">
+      </widget>
 
 
 
-</md-content>
+  </md-content>
+</div>

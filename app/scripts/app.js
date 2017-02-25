@@ -62,9 +62,11 @@ function fetchData() {
     console.log(config);
   }, function(errorResponse) {
     if (errorResponse.status === 401) {
+      console.log(errorResponse);
       $window.location.href = 'http://192.168.2.72/manager/users/?redirect_uri=%2Fapp%2Fcom.swttt.homeydash%2F';
     }
     if (errorResponse.status === 403) {
+      console.log(errorResponse);
       $window.location.href = 'http://192.168.2.72/manager/users/?redirect_uri=%2Fapp%2Fcom.swttt.homeydash%2F';
     }
   });
@@ -108,10 +110,13 @@ angular
 
   }])
 
-  .config(function($mdThemingProvider) {
+  .config(function($mdThemingProvider, $mdIconProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('orange')
       .accentPalette('orange');
+
+    $mdIconProvider
+      .iconSet('fa');
   })
 
 
