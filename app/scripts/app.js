@@ -112,8 +112,8 @@ angular
 
   .config(function($mdThemingProvider, $mdIconProvider) {
     $mdThemingProvider.theme('default')
-      .primaryPalette('orange')
-      .accentPalette('orange');
+      .primaryPalette('grey')
+      .accentPalette('grey');
 
     $mdIconProvider
       .iconSet('fa');
@@ -227,6 +227,10 @@ angular
       .state('main.page', {
         url: ':pagename',
         templateUrl: 'views/device-page.html'
+      })
+      .state('directpage', {
+        url: '/direct/:pagename',
+        templateUrl: 'views/direct-page.html'
       });
 
   });

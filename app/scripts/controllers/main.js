@@ -43,20 +43,55 @@ angular.module('homeydashV3App')
         });
 
     }
+    //Normal page
+    var windowHeight = $window.innerHeight - 62;
+    var widgetHeight = 60;
+    var maxWidgets = Math.floor(windowHeight / widgetHeight);
+    var totalExtraHeight = windowHeight - Math.floor(windowHeight / widgetHeight);
+    var totalWidgetHeight = maxWidgets + (totalExtraHeight / maxWidgets) - 5;
 
+    //Direct page
+    var windowHeightDirect = $window.innerHeight - 2;
+    var widgetHeightDirect = 60;
+    var maxWidgetsDirect = Math.floor(windowHeightDirect / widgetHeightDirect);
+    var totalExtraHeightDirect = windowHeightDirect - Math.floor(windowHeightDirect / widgetHeightDirect);
+    var totalWidgetHeightDirect = maxWidgetsDirect + (totalExtraHeightDirect / maxWidgetsDirect) - 5;
 
-
-
-
-
-    // Gridster options
+    // Gridster options normal page
     $scope.gridsterOpts = {
-      columns: 4,
+      columns: 8,
       colWidth: 'auto',
-      rowHeight: 150,
-      margins: [20, 20],
+      rowHeight: totalWidgetHeight,
+      margins: [10, 10],
       floating: false,
-      maxRows: 12,
+      maxRows: maxWidgetsDirect,
+      defaultSizeX: 1,
+      swapping: true,
+      mobileModeEnabled: true,
+      mobileBreakPoint: 600,
+      resizable: {
+        enabled: false
+      },
+      draggable: {
+        enabled: false,
+        scrollSensitivity: 60,
+        scrollSpeed: 5,
+        //  handle: '.draghandle',
+        start: function(event, $element, widget) {},
+        drag: function(event, $element, widget) {},
+        stop: function(event, $element, widget) {}
+      }
+
+    };
+
+    // Gridster options direct page
+    $scope.gridsterOptsDirect = {
+      columns: 8,
+      colWidth: 'auto',
+      rowHeight: totalWidgetHeightDirect,
+      margins: [10, 10],
+      floating: false,
+      maxRows: maxWidgets,
       defaultSizeX: 1,
       swapping: true,
       mobileModeEnabled: true,

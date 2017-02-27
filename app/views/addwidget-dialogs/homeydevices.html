@@ -1,7 +1,7 @@
 <md-dialog aria-label="Add widget" style="width:50%;">
 
 
-  <md-content style="margin:10px;">
+  <md-content style="margin:10px;background-color:white;">
     <div flex="100">
 
 
@@ -32,9 +32,9 @@
 
 
 
-          <md-radio-group style="width:100%" ng-model="newWidget.device">
+          <md-radio-group style="width:100%;" ng-model="newWidget.device">
 
-            <md-radio-button style="width:50%;float:left;text-align:left;" ng-repeat="device in devicelist" ng-value="device" ng-if="device.capabilities[newWidget.capability.capability]" aria-label="{{ device.name }}">
+            <md-radio-button style="text-align:left;width:50%;float:left;" ng-repeat="device in devicelist" ng-value="device" ng-if="device.capabilities[newWidget.capability.capability]" aria-label="{{ device.name }}">
 
               {{ device.name }} <small style="color:grey;">{{ device.zone.name }}</small>
 
@@ -42,6 +42,7 @@
 
           </md-radio-group>
           <br/>
+          <div style="clear:both;"></div>
           <div style="width:100%;text-align:center;">
             <md-button class="md-raised md-primary " ng-click="newWidget.device = null;" wz-previous> Back </md-button>
             <md-button class="md-raised md-warn " ng-click="closeDialog()"> Cancel </md-button>
@@ -49,13 +50,53 @@
           </div>
         </wz-step>
 
+        <wz-step style="text-align:center;" wz-title="Step 3">
+          <h3 style="font-weight:300;text-transform:uppercase; ">Give your widget a name</h3>
+
+          <md-input-container style="text-align:left;">
+            <label>Widget name</label>
+            <input name="widgetname" ng-model="newWidget.name">
+          </md-input-container>
+
+
+          <br/>
+          <div style="width:100%;text-align:center;">
+            <md-button class="md-raised md-primary " ng-click="newWidget.name = null;" wz-previous> Back </md-button>
+            <md-button class="md-raised md-warn " ng-click="closeDialog()"> Cancel </md-button>
+            <md-button ng-disabled="!newWidget.name" class="md-raised md-primary " wz-next> Next </md-button>
+          </div>
+        </wz-step>
+
+        <wz-step style="text-align:center;" wz-title="Step 4">
+          <h3 style="font-weight:300;text-transform:uppercase; ">Select an icon for your widget</h3>
+
+          <div style="height:60px;width:60px;float:left;margin:10px;cursor:pointer;" ng-click="newWidget.icon = icon" ng-repeat="icon in SETUP.icons">
+            <md-icon style="padding:5px;" ng-class="{activeIcon: selectedIcon(icon)}" md-svg-icon="images/icons/{{icon}}"></md-icon>
+          </div>
+
+          <!-- <md-radio-group style="width:100%;text-align:left;" ng-model="newWidget.icon">
+            <md-radio-button style="width:100px;float:left;" ng-repeat="icon in SETUP.icons" ng-value="icon" aria-label="{{icon}}">
+              <md-icon md-svg-icon="images/icons/{{icon}}"></md-icon>
+            </md-radio-button>
+          </md-radio-group> -->
+
+          <div style="clear:both;"></div>
+          <br/>
+          <div flex="100" style="text-align:center;float:none;">
+            <md-button class="md-raised md-primary " ng-click="newWidget.icon = null;" wz-previous> Back </md-button>
+            <md-button class="md-raised md-warn " ng-click="closeDialog()"> Cancel </md-button>
+            <md-button ng-disabled="!newWidget.icon" class="md-raised md-primary " wz-next> Next </md-button>
+          </div>
+        </wz-step>
+
         <wz-step style="text-align:center;" wz-title="Summary">
           <h3 style="font-weight:300;text-transform:uppercase; ">Summary</h3>
 
-          <div style="width:50%;margin:0 auto;text-align:left;background-color:rgb(250,250,250);padding:10px;margin-bottom:15px;" md-whiteframe="3">
+          <div style="width:50%;margin:0 auto;text-align:left;padding:10px;margin-bottom:15px;" md-whiteframe="3">
             <span>
               <h4 style="font-weight:300;text-transform:uppercase;"> {{params.type}} </h4>
               <b>Device name: </b>{{newWidget.device.name}} <br/>
+              <b>Widget name: </b>{{newWidget.name}} <br/>
               <b>Zone name: </b>{{newWidget.device.zone.name}}<br/>
               <b>Capability: </b>{{newWidget.capability.description}}
             </span> <br/><br/>

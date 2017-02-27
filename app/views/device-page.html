@@ -1,6 +1,6 @@
-<div ng-class="{ 'sidebar-margin': localStorage.sidebarLocked }" class="headerbar" flex="100" flex-xs="100" flex-xs="100" style="height:60px;max-height:60px;padding:17px;z-index:4;position:fixed;top:0;right:0;left:0;">
+<div ng-class="{ 'sidebar-margin': localStorage.sidebarLocked }" class="headerbar" flex="100" flex-xs="100" flex-xs="100" style="height:60px;max-height:60px;padding:17px;z-index:10;position:fixed;top:0;right:0;left:0;">
   <md-icon ng-if="!localStorage.sidebarLocked" ng-click="switchSidebar()" class="menu-handle">menu</md-icon>
-  <h2 style="margin-left:15px;display:inline;color:white;text-transform:uppercase;font-weight:300;">{{params.pagename}}</h2>
+  <h2 style="margin-left:15px;display:inline;color:rgb(237, 237, 237);text-transform:uppercase;font-weight:300;">{{params.pagename}}</h2>
 
   <!-- <div ng-if="gridsterOpts.draggable.enabled" class="addwidget">
     <center>
@@ -24,8 +24,8 @@
     </md-menu-content>
   </md-menu> -->
 
-  <md-icon ng-if="!CONFIG.general.hideicon" ng-click="null" style="color:white;position:absolute;top:20px;right:10px;cursor:pointer;" ui-sref="setup">settings</md-icon>
-  <md-icon onclick="location.reload();" style="color:white;position:absolute;top:20px;right:75px;cursor:pointer;">replay</md-icon>
+  <md-icon ng-if="!CONFIG.general.hideicon" ng-click="null" style="color:rgb(237, 237, 237);position:absolute;top:20px;right:10px;cursor:pointer;" ui-sref="setup.page({pagename: '{{params.pagename}}'})">settings</md-icon>
+  <md-icon onclick="location.reload();" style="color:rgb(237, 237, 237);position:absolute;top:20px;right:75px;cursor:pointer;">replay</md-icon>
 
 
 
@@ -44,7 +44,7 @@
 </md-toolbar> -->
 
 <div ng-scrollbars ng-scrollbars-config="bodyconfig" style="width:100%;">
-  <md-content style="background:none;margin:10px;margin-top:60px;" gridster="gridsterOpts">
+  <md-content style="background:none;margin:0px;margin-top:60px;" gridster="gridsterOpts">
 
     <!-- <widget gridster-item style="overflow:hidden;" size-x="1" size-y="2">
     <img class="md-whiteframe-3dp" border="0" src="http://api.buienradar.nl/image/1.0/RadarMapNL" style="width:auto;height:100%;min-width:100%;">

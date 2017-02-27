@@ -16,10 +16,7 @@ user-select: none;
 .sidebar-margin{
   margin-left:200px;
 }
-.headerbar{
-background-color:rgba(62, 62, 62, 0.69);
 
-}
 
 
 
@@ -40,7 +37,7 @@ background:rgba(0,0,0,0);
 
 
 .gridster-mobile .gridster-item {
-    height: 150px;
+    height: 100px;
     position: static;
     float: none;
 }
@@ -75,11 +72,32 @@ md-list-item.active{
 
 
 .menu-handle{
-  color:white;
+  color:rgb(237, 237, 237);
   cursor:pointer;
   margin-top:-10px;
 }
 .md-sidenav-left{
   width:200px;
   min-width:200px;
+}
+
+.widgetOn{
+  color: rgba(0, 0, 0, 0.6);
+}
+.widgetOff{
+  color: rgba(0, 0, 0, 0.2);
+}
+.headerbar{
+background-color:rgba(0,0,0,0.2);
+}
+
+.sliderOff .md-thumb:after, .sliderOff .md-track{
+  opacity:0.3;
+}
+.sliderOff .md-focus-thumb, .sliderOff .md-focus-ring{
+  opacity:0.3;
+}
+.activeIcon{
+  color:black;
+  background-color:rgb(198, 198, 198);
 }

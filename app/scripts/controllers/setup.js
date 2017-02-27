@@ -12,10 +12,10 @@ angular.module('homeydashV3App')
 
     // Gridster Options for settings
     $scope.gridsterOptsSettings = {
-      columns: 4,
+      columns: 8,
       colWidth: 'auto',
-      rowHeight: 150,
-      margins: [20, 20],
+      rowHeight: 100,
+      margins: [10, 10],
       floating: false,
       maxRows: 12,
       defaultSizeX: 1,
@@ -201,11 +201,14 @@ angular.module('homeydashV3App')
 
     $scope.saveWidget = function(pageid) {
       $rootScope.CONFIG.pages[pageid].widgets.push({
-        'name': $scope.newWidget.device.name,
+        'name': $scope.newWidget.name,
+        'icon': $scope.newWidget.icon,
         'widgettype': $scope.newWidget.capability.capability,
         'capability': Object.keys($rootScope.devicelist[$scope.newWidget.device.id].capabilities),
         'deviceid': $scope.newWidget.device.id,
-        'class': $scope.newWidget.capability.class
+        'class': $scope.newWidget.capability.class,
+        'sizeX': $scope.newWidget.capability.width,
+        'sizeY': $scope.newWidget.capability.height
       });
       savesettings.save($rootScope.CONFIG).then(function() {
         $scope.closeDialog();
@@ -214,7 +217,13 @@ angular.module('homeydashV3App')
     };
 
 
-
+    $scope.selectedIcon = function(icon) {
+      if ($scope.newWidget.icon === icon) {
+        return true;
+      } else {
+        return false;
+      }
+    }
 
 
 
