@@ -38,7 +38,7 @@ function fetchData() {
   var $window = initInjector.get('$window');
   var $localStorage = initInjector.get('$localStorage');
 
-  return $http.get('http://192.168.2.72/api/app/com.swttt.homeydash/config.json', httpconfig).then(function(response) {
+  return $http.get('http://192.168.2.72/api/app/com.swttt.homeydash/config.json').then(function(response) {
     var config = response.data.result;
     // Add additional services/constants/variables to your app,
     // and then finally bootstrap it:
@@ -104,21 +104,11 @@ angular
   ])
 
   // Only used for LOCAL!
-  .run(['$http', function($http) {
-    $http.defaults.headers.common['Authorization'] = 'Bearer da3110b6042fae4bd73713189240fc8c797da0c7';
-    $http.defaults.headers.common['Content-Type'] = 'application/json';
-
-  }])
-
-  .config(function($mdThemingProvider, $mdIconProvider) {
-    $mdThemingProvider.theme('default')
-      .primaryPalette('grey')
-      .accentPalette('grey');
-
-    $mdIconProvider
-      .iconSet('fa');
-  })
-
+  // .run(['$http', function($http) {
+  //   $http.defaults.headers.common['Authorization'] = 'Bearer da3110b6042fae4bd73713189240fc8c797da0c7';
+  //   $http.defaults.headers.common['Content-Type'] = 'application/json';
+  //
+  // }])
 
 
   .run(function($rootScope, alldevices, CONFIG, socket, wallpaper, $http) {
@@ -152,6 +142,45 @@ angular
         });
       });
     });
+  })
+
+  .config(function($mdThemingProvider, $mdIconProvider) {
+
+    var themes = [
+      "red",
+      "pink",
+      "purple",
+      "deep-purple",
+      "indigo",
+      "blue",
+      "light-blue",
+      "cyan",
+      "teal",
+      "green",
+      "light-green",
+      "lime",
+      "yellow",
+      "amber",
+      "orange",
+      "deep-orange",
+      "brown",
+      "grey",
+      "blue-grey"
+    ];
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue-grey')
+      .accentPalette('blue-grey');
+
+    angular.forEach(themes, function(theme) {
+      $mdThemingProvider.theme(theme)
+        .primaryPalette(theme)
+        .accentPalette(theme);
+    });
+    $mdThemingProvider.alwaysWatchTheme(true);
+
+    $mdIconProvider
+      .iconSet('fa');
   })
   .run(['$rootScope', '$state', '$localStorage', function($rootScope, $state, $localStorage) {
     if (!$localStorage.defaultPage) {

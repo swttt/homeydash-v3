@@ -19,8 +19,8 @@
 
   </div>
 </md-content> -->
-<md-content class="md-whiteframe-1dp" layout="row" layout-wrap style="height:100%;padding:0;margin:0;background-color:rgba(255,255,255,0.4);">
-  <md-icon md-svg-src="images/icons/{{widget.icon}}" style="width:25%;height:25%;padding:5px;"></md-icon>
-  <h3 style="font-weight:300;text-transform:uppercase;width:100%;text-align:center;margin-bottom:0;">{{devicelist[widget.deviceid].state.measure_temperature}} °C</h3>
+<md-content ng-class="localStorage.GENERAL.widgetbackground" class="md-whiteframe-1dp" layout="row" layout-wrap style="height:100%;padding:0;margin:0;overflow:hidden;">
+  <md-icon class="md-primary widgeticon" md-svg-src="images/icons/{{widget.icon}}" style="width:25%;height:25%;padding:5px;"></md-icon>
+  <h3 md-truncate style="font-weight:300;text-transform:uppercase;width:100%;text-align:center;margin-bottom:0;">{{devicelist[widget.deviceid].state.measure_temperature}} °C</h3>
   <h4 style="font-weight:300;text-transform:uppercase;width:100%;text-align:center;margin-top:5px;opacity:0.5;">{{widget.name}}</h4>
 </md-content>

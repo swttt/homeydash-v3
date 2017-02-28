@@ -1,13 +1,15 @@
-<md-content class="md-whiteframe-1dp" layout="row" layout-wrap style="height:100%;padding:0;margin:0;background-color:rgba(255,255,255,0.4);">
+<md-content ng-class="localStorage.GENERAL.widgetbackground" class="md-whiteframe-1dp" layout="row" layout-wrap style="height:100%;padding:0;margin:0;overflow:hidden;">
 
-  <div flex="100" layout-align="center start" style="margin:0px 20px 0px 20px;position:relative;">
-    <md-icon ng-click="onoff(widget.deviceid, devicelist[widget.deviceid].state.onoff)" style="height:40px;width:40px;padding:5px;float:left;" md-svg-src="images/icons/{{widget.icon}}" ng-class="{widgetOn: devicelist[widget.deviceid].state.onoff, widgetOff: !devicelist[widget.deviceid].state.onoff}"></md-icon>
+  <div ng-click="onoff(widget.deviceid, devicelist[widget.deviceid].state.onoff)" flex="100" layout-align="center start" style="margin:0px 20px 0px 20px;position:relative;">
+    <md-icon class="md-primary widgeticon" style="height:40px;width:40px;padding:5px;float:left;" md-svg-src="images/icons/{{widget.icon}}" ng-class="{widgetOn: devicelist[widget.deviceid].state.onoff, widgetOff: !devicelist[widget.deviceid].state.onoff}"></md-icon>
     <div flex="100">
-      <h3 style="text-align:right;font-weight:300;text-transform:uppercase;margin-top:5px;margin-bottom:5px;">{{widget.name}}</h3>
+      <h3 md-truncate style="text-align:right;font-weight:300;text-transform:uppercase;margin-top:5px;margin-bottom:5px;">{{widget.name}}</h3>
       <h5 style="text-align:right;font-weight:300;text-transform:uppercase;margin:0;opacity:0.5;" ng-if="!CONFIG.general.hidezonename">{{devicelist[widget.deviceid].zone.name}}</h5>
+      <h5 style="text-align:right;font-weight:300;text-transform:uppercase;margin:0;opacity:0.5;" ng-if="CONFIG.general.hidezonename && CONFIG.general.showdevicestate"><state ng-if="devicelist[widget.deviceid].state.onoff">ON</state> <state ng-if="!devicelist[widget.deviceid].state.onoff">OFF</state></h5>
     </div>
-
-    <md-slider ng-class="{sliderOn: devicelist[widget.deviceid].state.onoff, sliderOff: !devicelist[widget.deviceid].state.onoff}" style="margin:0 auto;position:absolute;bottom:0;width:100%;" ng-change="dim(widget.deviceid, devicelist[widget.deviceid].state.dim);"
+  </div>
+  <div flex="100" style="margin:0px 20px 0px 20px;position:relative;">
+    <md-slider class="md-primary" ng-class="{sliderOn: devicelist[widget.deviceid].state.onoff, sliderOff: !devicelist[widget.deviceid].state.onoff}" style="margin:0 auto;position:absolute;bottom:0;width:100%;" ng-change="dim(widget.deviceid, devicelist[widget.deviceid].state.dim);"
         ng-model="devicelist[widget.deviceid].state.dim" flex min="0" step="0.01" max="1" aria-label="dim">
       </md-slider>
 

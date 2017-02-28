@@ -17,7 +17,9 @@ angular.module('homeydashV3App')
     // Hide overlay on start (used for dimming)
     $scope.hideOverlay = false;
 
-
+    if (!$scope.localStorage.GENERAL.widgetbackground) {
+      $scope.localStorage.GENERAL.widgetbackground = 'transparant-bg';
+    }
     // Set sidebar check for edit mode
     var sidebarLocked;
 
@@ -59,7 +61,7 @@ angular.module('homeydashV3App')
 
     // Gridster options normal page
     $scope.gridsterOpts = {
-      columns: 8,
+      columns: 30,
       colWidth: 'auto',
       rowHeight: totalWidgetHeight,
       margins: [10, 10],
@@ -86,7 +88,7 @@ angular.module('homeydashV3App')
 
     // Gridster options direct page
     $scope.gridsterOptsDirect = {
-      columns: 8,
+      columns: 30,
       colWidth: 'auto',
       rowHeight: totalWidgetHeightDirect,
       margins: [10, 10],

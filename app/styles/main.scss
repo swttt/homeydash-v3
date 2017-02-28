@@ -81,11 +81,14 @@ md-list-item.active{
   min-width:200px;
 }
 
-.widgetOn{
-  color: rgba(0, 0, 0, 0.6);
+// .widgetOn{
+//   color: rgba(0, 0, 0, 0.6);
+// }
+.widgeticon{
+  opacity:1;
 }
 .widgetOff{
-  color: rgba(0, 0, 0, 0.2);
+  opacity:0.3;
 }
 .headerbar{
 background-color:rgba(0,0,0,0.2);
@@ -100,4 +103,10 @@ background-color:rgba(0,0,0,0.2);
 .activeIcon{
   color:black;
   background-color:rgb(198, 198, 198);
+}
+.white-bg{
+  background-color:rgba(255, 255, 255,1)!important;
+}
+.transparant-bg{
+  background-color:rgba(255,255,255,0.4)!important;
 }

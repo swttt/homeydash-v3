@@ -12,18 +12,19 @@ angular.module('homeydashV3App')
 
     // Gridster Options for settings
     $scope.gridsterOptsSettings = {
-      columns: 8,
+      columns: 30,
       colWidth: 'auto',
-      rowHeight: 100,
+      rowHeight: 60,
       margins: [10, 10],
       floating: false,
       maxRows: 12,
       defaultSizeX: 1,
-      swapping: true,
+      swapping: false,
       mobileModeEnabled: false,
       mobileBreakPoint: 600,
       resizable: {
-        enabled: false
+        enabled: true,
+        handles: ['e', 'w'],
       },
       draggable: {
         enabled: true,
