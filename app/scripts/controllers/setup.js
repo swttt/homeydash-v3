@@ -19,12 +19,12 @@ angular.module('homeydashV3App')
       floating: false,
       maxRows: 12,
       defaultSizeX: 1,
-      swapping: false,
+      swapping: true,
       mobileModeEnabled: false,
       mobileBreakPoint: 600,
       resizable: {
         enabled: true,
-        handles: ['e', 'w'],
+        handles: ['sw', 'se'],
       },
       draggable: {
         enabled: true,
@@ -63,44 +63,81 @@ angular.module('homeydashV3App')
     };
 
 
+    $scope.currentNavItem = $state.params.pagename;
+    $rootScope.$on('$stateChangeStart',
+      function(event, toState, toParams, fromState, fromParams) {
+        if (!toParams[0]) {
+          $scope.currentNavItem = null;
+        }
+        $scope.currentNavItem = toParams.pagename;
 
+      })
     // Add page
     // CHECK FOR DUPLICATES HERE
+    function escapeHtml(text) {
+      var map = {
+        '&': ' and ',
+        '<': '',
+        '>': '',
+        '"': '',
+        "'": ''
+      };
 
+      return text.replace(/[&<>"']/g, function(m) {
+        return map[m];
+      });
+    };
     $scope.savePage = function(pagename) {
 
       // Push to array
-      $rootScope.CONFIG.pages.push({
-        pagename: pagename,
-        widgets: []
-      });
+      if (pagename) {
+        $rootScope.CONFIG.pages.push({
+          pagename: escapeHtml(pagename),
+          widgets: []
+        });
+        console.log(escapeHtml(pagename));
 
-      // Save settings
-      savesettings.save($rootScope.CONFIG).then(function(response) {
-        $state.go('setup');
-      }, function(error) {
+        // Save settings
+        savesettings.save($rootScope.CONFIG).then(function(response) {
+          $state.go('setup');
+        }, function(error) {
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent('ERROR: ' + error)
+            .position('top right')
+          );
+        });
+      } else {
         $mdToast.show(
           $mdToast.simple()
-          .textContent('ERROR: ' + error)
+          .textContent('ERROR: ' + 'pagename cannot be empty')
           .position('top right')
         );
-      });
+      }
     };
 
 
     // Save pagename
     $scope.savePagename = function(pageid, newvalue) {
-      $rootScope.CONFIG.pages[pageid].pagename = newvalue;
-      savesettings.save($rootScope.CONFIG).then(function() {
-        $state.go('setup.page', {
-          pagename: newvalue
-        }, {
-          reload: true,
-          inherit: false,
-          notify: true
+      if (newvalue) {
+        $rootScope.CONFIG.pages[pageid].pagename = escapeHtml(newValue);
+        savesettings.save($rootScope.CONFIG).then(function() {
+          $state.go('setup.page', {
+            pagename: newvalue
+          }, {
+            reload: true,
+            inherit: false,
+            notify: true
+          });
+          console.log('New settings saved!');
         });
-        console.log('New settings saved!');
-      });
+      } else {
+        $mdToast.show(
+          $mdToast.simple()
+          .textContent('ERROR: ' + 'pagename cannot be empty')
+          .position('top right')
+        );
+      }
     };
 
     // Delete page
@@ -120,8 +157,13 @@ angular.module('homeydashV3App')
     };
 
     // Settings for pages DnD
+
     $scope.sortableOptionsPages = {
-      handle: '.orderPages',
+      handle: '.menudrag',
+      axis: 'x',
+      'ui-floating': true,
+      items: '.sortable-item',
+
       update: function(e, ui) {
         savesettings.save($rootScope.CONFIG);
       }
@@ -202,7 +244,7 @@ angular.module('homeydashV3App')
 
     $scope.saveWidget = function(pageid) {
       $rootScope.CONFIG.pages[pageid].widgets.push({
-        'name': $scope.newWidget.name,
+        'name': escapeHtml($scope.newWidget.name),
         'icon': $scope.newWidget.icon,
         'widgettype': $scope.newWidget.capability.capability,
         'capability': Object.keys($rootScope.devicelist[$scope.newWidget.device.id].capabilities),

@@ -4,7 +4,7 @@
 
   <md-list-item>
     <p>Set a default page</p>
-    <md-select class="md-secondary" ng-model="storage.defaultPage">
+    <md-select class="md-secondary" ng-model="storage.defaultPage" aria-label="default page">
       <md-option ng-value="false"><em>None</em></md-option>
       <md-option ng-repeat="page in CONFIG.pages" ng-value="page.pagename">
         {{page.pagename}}
@@ -20,7 +20,7 @@
 
   <md-list-item>
     <p>Set theme</p>
-    <md-select class="md-secondary" ng-model="storage.GENERAL.theme">
+    <md-select class="md-secondary" ng-model="storage.general.theme" aria-label="theme">
       <md-option ng-repeat="theme in SETUP.themes" ng-value="theme">
         {{theme}}
       </md-option>
@@ -29,12 +29,15 @@
 
   <md-list-item>
     <p>Set widget background</p>
-    <md-select class="md-secondary" ng-model="storage.GENERAL.widgetbackground">
-      <md-option value="transparant-bg">
-        Transparant
+    <md-select class="md-secondary" ng-model="storage.general.widgetbackground" aria-label="widget background">
+      <md-option value="transparant-white-bg">
+        Transparant white
+      </md-option>
+      <md-option value="transparant-dark-bg">
+        Transparant dark
       </md-option>
       <md-option value="white-bg">
-        white
+        White
       </md-option>
     </md-select>
   </md-list-item>

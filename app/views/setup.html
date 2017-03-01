@@ -15,7 +15,7 @@
   </md-card>
 </div> -->
 
-<md-toolbar style="background-color:rgba(62, 62, 62, 0.69);position: fixed;z-index:3;">
+<md-toolbar class="md-medium-tall" style="background-color:rgba(62, 62, 62, 0.69);z-index:3;">
   <div class="md-toolbar-tools">
 
     <h2 style="margin-left:15px;display:inline;color:white;text-transform:uppercase;font-weight:300;" flex md-truncate>Settings</h2>
@@ -98,16 +98,32 @@
     </md-menu>
 
   </div>
+
+  <bar style="margin-top:-7px;" ui-sortable="sortableOptionsPages" ng-model="CONFIG.pages">
+    <md-nav-bar class="navbar" md-no-ink-bar="true" md-selected-nav-item="currentNavItem" nav-bar-aria-label="Pages">
+
+      <md-nav-item class="menunavitem sortable-item" ng-repeat="page in CONFIG.pages" md-nav-sref="setup.page({pagename: '{{page.pagename}}'})" name="{{page.pagename}}" aria-label="{{page.pagename}}">
+        {{page.pagename}}
+        <md-icon style="cursor:move;margin-left:5px;" class="menudrag">more_horiz</md-icon>
+      </md-nav-item>
+
+      <md-nav-item class="md-primary navbaradd" md-nav-click="openAddpageDialog()" aria-label="add page" name="addpage">
+        <md-icon>add</md-icon>
+      </md-nav-item>
+    </md-nav-bar>
+  </bar>
 </md-toolbar>
+
+
 
 <!-- <div ng-class="{ 'sidebar-margin': localStorage.sidebarLocked }" class="headerbar" flex="100" flex-xs="100" flex-xs="100" style="height:60px;max-height:60px;padding:17px;z-index:4;position:fixed;top:0;right:0;left:0;">
   <h2 style="margin-left:15px;display:inline;color:white;text-transform:uppercase;font-weight:300;">Settings</h2>
 </div> -->
 
-<div flex="100" layout="row" layout-wrap style="padding-top:74px;">
-  <div flex="20" style="padding:10px;">
+<div flex="100" layout="row" layout-wrap style="margin-top:10px;">
+  <!-- <div flex="20" style="padding:10px;">
     <md-list style="background-color:white;" class="md-dense" ui-sortable="sortableOptionsPages" ng-model="CONFIG.pages">
-      <md-list-item ng-repeat="page in CONFIG.pages" ui-sref-active="active" style="margin-left:7px;margin-right:7px;" class="md-2-line" ui-sref="setup.page({pagename: '{{page.pagename}}'})">
+      <md-list-item ng-repeat="page in CONFIG.pages" ng-value="page.pagename" ui-sref-active="active" style="margin-left:7px;margin-right:7px;" class="md-2-line" ui-sref="setup.page({pagename: '{{page.pagename}}'})">
         <div class="md-list-item-text">
           <h3>{{page.pagename}}</h3>
           <p>{{page.widgets.length || '0'}} widgets</p>
@@ -123,11 +139,11 @@
         </md-button>
       </md-list-item>
     </md-list>
-  </div>
+  </div> -->
 
-  <div flex="80" style="" ui-view>
-    <div style="background-color:rgba(255,255,255,1);padding:10px;margin-top:10px;margin-right:10px;">
-      <h3 style="font-weight:300;width:100%;text-align:center;color:black;">Select a page on the left side to edit.</h3>
+  <div flex="100" style="" ui-view>
+    <div style="background-color:rgba(255,255,255,1);padding:10px;margin-top:10px;margin-right:10px;margin-left:10px;">
+      <h3 style="font-weight:300;width:100%;text-align:center;color:black;">Select a page on the top to edit.</h3>
     </div>
   </div>
 </div>

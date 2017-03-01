@@ -6,8 +6,9 @@
 
 
 
-  <widget gridster-item="widget" ng-repeat="widget in CONFIG.pages[getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename)].widgets" ng-include src="'views/setup/widget.html'" ng-controller="DevicesCtrl" widget="widget.widgettype">
-  </widget>
+  <widget style="cursor:move;" gridster-item="widget" ng-repeat="widget in CONFIG.pages[getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename)].widgets" ng-include ng-include src="'views/setup/widgets/' + widget.widgettype + '.html'" ng-controller="DevicesCtrl"
+      widget="widget.widgettype">
+    </widget>
 
 
 

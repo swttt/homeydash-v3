@@ -17,8 +17,12 @@ angular.module('homeydashV3App')
     // Hide overlay on start (used for dimming)
     $scope.hideOverlay = false;
 
-    if (!$scope.localStorage.GENERAL.widgetbackground) {
-      $scope.localStorage.GENERAL.widgetbackground = 'transparant-bg';
+    if (!$scope.localStorage.general) {
+      $scope.localStorage.general = {};
+    }
+
+    if (!$scope.localStorage.general.widgetbackground) {
+      $scope.localStorage.general.widgetbackground = 'transparant-bg';
     }
     // Set sidebar check for edit mode
     var sidebarLocked;
