@@ -120,7 +120,7 @@ angular.module('homeydashV3App')
     // Save pagename
     $scope.savePagename = function(pageid, newvalue) {
       if (newvalue) {
-        $rootScope.CONFIG.pages[pageid].pagename = escapeHtml(newValue);
+        $rootScope.CONFIG.pages[pageid].pagename = escapeHtml(newvalue);
         savesettings.save($rootScope.CONFIG).then(function() {
           $state.go('setup.page', {
             pagename: newvalue
