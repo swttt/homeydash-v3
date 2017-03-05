@@ -28,6 +28,8 @@ angular.module('homeydashV3App')
     var sidebarLocked;
 
 
+
+
     // !! SET HOMEYDASH WIDE !!
     // Function to save settings
     $scope.saveSettings = function() {

@@ -17,7 +17,12 @@ user-select: none;
   margin-left:200px;
 }
 
-
+.markedDel img {
+    opacity:0.1;
+}
+.markedDel video {
+    opacity:0.1;
+}
 
 
 #grid{
@@ -127,7 +132,7 @@ background-color:rgba(0,0,0,0.2);
   display:inline;
 }
 .deleteWidget{
-width: 20px;;
+width: 20px;
 height: 20px;
 background-color: rgb(203, 10, 10)!important;
 border-radius:50%;
@@ -138,6 +143,20 @@ right:-3px;
 position: absolute;
 }
 
+.markedDel{
+  background-color:rgba(255, 0, 0, 0.47)!important;
+}
+
 
 .navbar .md-active ._md-nav-button-text{color:rgba(255, 255, 255, 0.9)!important;font-weight:400;}
 .navbar .md-active ._md-nav-button-text md-icon{color:rgba(255, 255, 255, 0.9)!important;}
+
+.widgetControl{
+  height:50px;
+  width:200px;
+  //background-color:rgba(68, 68, 68, 0.79);
+  position: fixed;
+  top: 0;
+  left:50%;
+  margin-left:-100px;;
+}

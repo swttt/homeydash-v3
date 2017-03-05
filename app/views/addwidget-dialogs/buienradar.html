@@ -1,0 +1,56 @@
+<md-dialog aria-label="Add widget" style="width:50%;">
+
+
+  <md-content style="margin:10px;background-color:white;">
+    <div flex="100">
+
+
+      <wizard on-finish="saveWidget(getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename))" hide-indicators="true">
+
+
+
+        <wz-step style="text-align:center;" wz-title="Step 1">
+          <h3 style="font-weight:300;text-transform:uppercase; ">Select a location</h3>
+
+
+          <md-input-container>
+            <md-select ng-model="newWidget.url" placeholder="Select a location">
+              <md-option ng-value="location.url" ng-repeat="location in SETUP.buienradar_urls">{{ location.name }}</md-option>
+            </md-select>
+          </md-input-container><br/>
+          <!-- <md-button class="md-raised md-primary " ng-click="newWidget.capability = null;" ui-sref="setup.pages.addwidget({
+              pagename: params.pagename
+            })"> Back </md-button> -->
+          <md-button class="md-raised md-warn " ng-click="closeDialog()"> Cancel </md-button>
+          <md-button ng-disabled="!newWidget.url" class="md-raised md-primary " wz-next> Next </md-button>
+
+
+
+        </wz-step>
+
+
+        <wz-step style="text-align:center;" wz-title="Step 2">
+          <h3 style="font-weight:300;text-transform:uppercase; ">Give your widget a name</h3>
+
+          <md-input-container style="text-align:left;">
+            <label>Widget name</label>
+            <input name="widgetname" ng-model="newWidget.name">
+
+          </md-input-container>
+
+
+
+          <br/>
+          <div style="width:100%;text-align:center;">
+            <md-button class="md-raised md-primary " wz-previous> Back </md-button>
+            <md-button class="md-raised md-warn " ng-click="closeDialog()"> Cancel </md-button>
+            <md-button class="md-raised md-primary " ng-disabled="!newWidget.name" wz-finish> Save </md-button>
+          </div>
+        </wz-step>
+      </wizard>
+      </center>
+    </div>
+
+  </md-content>
+
+</md-dialog>

@@ -6,10 +6,13 @@
 
 
 
-  <widget style="cursor:move;" gridster-item="widget" ng-repeat="widget in CONFIG.pages[getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename)].widgets" ng-include ng-include src="'views/setup/widgets/' + widget.widgettype + '.html'" ng-controller="DevicesCtrl"
-      widget="widget.widgettype">
+  <widget ng-click="addtodelete(widget.id);" ng-mouseenter="options=true" ng-mouseleave="options=false" style="cursor:move;" gridster-item="widget" ng-repeat="widget in CONFIG.pages[getIdbyAtrr(CONFIG.pages, 'pagename', params.pagename)].widgets" ng-include
+      src="'views/setup/widgets/' + widget.widgettype + '.html'" ng-controller="DevicesCtrl" widget="widget.widgettype">
     </widget>
 
 
 
+</div>
+<div class="widgetControl">
+  <md-button>
 </div>

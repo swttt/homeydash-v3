@@ -8,41 +8,46 @@
  * Controller of the homeydashV3App
  */
 angular.module('homeydashV3App')
-  .controller('DevicesCtrl', function($scope, $rootScope, $mdToast, device, alldevices, debounce, savesettings, $mdDialog) {
-    // Delete widget
-    $scope.removeWidget = function(widgetid, widget, params) {
-      //var index = $rootScope.CONFIG.pages[pagename].indexOf(widgetname);
-      //console.log(widget);
+  .controller('DevicesCtrl', function($timeout, $scope, $rootScope, $mdToast, device, alldevices, debounce, savesettings, $mdDialog) {
 
-      //delete $rootScope.CONFIG.pages[pagename].widgets[widgetid];
+    //Buienradar refresh
+    if ($scope.widget.url) {
+      console.log('Buienradar url found!');
+      updateBuienradar();
 
-      // Appending dialog to document.body to cover sidenav in docs app
-      var confirm = $mdDialog.confirm()
-        .title('Delete widget')
-        .textContent('Are you sure you want to delete ' + widget.name + '?')
-        .ariaLabel('Delete widget')
-        .ok('Yes')
-        .cancel('No');
+      function updateBuienradar() {
+        $timeout(function() {
+          $scope.widget.url = $scope.widget.url + '?_lastupdate=' + new Date().getTime();
+          console.log('updated: ' + $scope.widget.name);
+          updateBuienradar();
+        }, 600000);
+      };
+    }
 
-      $mdDialog.show(confirm).then(function() {
-        // Delete widget
-        $rootScope.CONFIG.pages[$scope.getIdbyAtrr($rootScope.CONFIG.pages, 'pagename', params.pagename)].widgets.splice(widgetid, 1);
-        savesettings.save($rootScope.CONFIG).then(function(response) {
 
-        }, function(error) {
-          $mdToast.show(
-            $mdToast.simple()
-            .textContent('ERROR: ' + error)
-            .position('top right')
-          );
-        });
-      }, function() {
-        // Don't delete
+
+
+    $scope.showFeedItem = function(itemPass) {
+
+      $mdDialog.show({
+        templateUrl: 'views/widgets/feedDialog.html',
+        clickOutsideToClose: true,
+        preserveScope: true,
+        locals: {
+          item: itemPass
+        },
+        controller: ['$scope', 'item', '$mdDialog', function($scope, item, $mdDialog) {
+          $scope.item = item;
+          $scope.closeDialog = function() {
+            console.log('closing dialog!');
+            $mdDialog.cancel();
+          };
+        }]
       });
 
 
-
     };
+
 
     // Button Control
     $scope.button = function(currentId) {

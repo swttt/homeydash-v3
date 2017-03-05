@@ -1,7 +1,7 @@
-<md-content ng-mouseenter="options=true" ng-mouseleave="options=false" ng-class="localStorage.general.widgetbackground" class="md-whiteframe-1dp" layout="row" layout-wrap style="height:100%;padding:0;margin:0;overflow:hidden;">
-  <div class="deleteWidget" ng-click="removeWidget($index, widget, params)" ng-show="options" style="">
+<md-content ng-class="[localStorage.general.widgetbackground, {markedDel: markedDelete(widget.id)}]" class="md-whiteframe-1dp" layout="row" layout-wrap style="height:100%;padding:0;margin:0;overflow:hidden;">
+  <!-- <div class="deleteWidget" ng-click="removeWidget($index, widget, params)" ng-show="options" style="">
     <md-icon style="font-size:14px;line-height:14px;margin-left:3px;margin-top:3px;color:white;">close</md-icon>
-  </div>
+  </div> -->
   <div flex="100" layout-align="center start" style="margin:0px 20px 0px 20px;position:relative;">
     <md-icon class="md-primary widgeticon" style="height:40px;width:40px;padding:5px;float:left;" md-svg-src="images/icons/{{widget.icon}}" ng-class="{widgetOn: devicelist[widget.deviceid].state.onoff, widgetOff: !devicelist[widget.deviceid].state.onoff}"></md-icon>
     <div flex="100">

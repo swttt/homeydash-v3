@@ -1,6 +1,26 @@
 'use strict';
 
+if (typeof Function.prototype.bind != 'function') {
+  Function.prototype.bind = function bind(obj) {
+    var args = Array.prototype.slice.call(arguments, 1),
+      self = this,
+      nop = function() {},
+      bound = function() {
+        return self.apply(
+          this instanceof nop ? this : (obj || {}), args.concat(
+            Array.prototype.slice.call(arguments)
+          )
+        );
+      };
+    nop.prototype = this.prototype || {};
+    bound.prototype = new nop();
+    return bound;
+  };
+}
 
+function getRandomId() {
+  return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+};
 
 jQuery.fn.cssNumber = function(prop) {
   var v = parseInt(this.css(prop), 10);
@@ -111,7 +131,9 @@ angular
   // }])
 
 
-  .run(function($rootScope, alldevices, CONFIG, socket, wallpaper, $http) {
+  .run(function($rootScope, alldevices, CONFIG, socket, wallpaper, $http, savesettings) {
+    $rootScope.CONFIG = CONFIG;
+
     // Get current wallpaper
     wallpaper().then(function(response) {
       $rootScope.wallpaper = response.data.result.properties.wallpaper;
@@ -142,9 +164,19 @@ angular
         });
       });
     });
-  })
 
-  .config(function($mdThemingProvider, $mdIconProvider) {
+    angular.forEach($rootScope.CONFIG.pages, function(pages) {
+      angular.forEach(pages.widgets, function(widget) {
+        if (!widget.id) {
+          widget.id = getRandomId();
+          console.log(widget.name + ' has no ID, added on for you! :)');
+          savesettings.save($rootScope.CONFIG);
+        }
+      });
+    });
+  })
+  .config(function($mdThemingProvider, $mdIconProvider, $sceProvider) {
+    $sceProvider.enabled(false);
 
     var themes = [
       "red",
@@ -182,6 +214,8 @@ angular
     $mdIconProvider
       .iconSet('fa');
   })
+
+
   .filter('numberEx', ['numberFilter', '$locale',
     function(number, $locale) {
 

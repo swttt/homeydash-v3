@@ -8,8 +8,14 @@
  * Controller of the homeydashV3App
  */
 angular.module('homeydashV3App')
-  .controller('SetupCtrl', function(WizardHandler, $scope, $rootScope, $mdDialog, $mdToast, savesettings, $localStorage, $state, $element) {
+  .controller('SetupCtrl', function($timeout, WizardHandler, $scope, $rootScope, $mdDialog, $mdToast, savesettings, $localStorage, $state, $element) {
 
+
+
+    var preventClick = function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+    };
     // Gridster Options for settings
     $scope.gridsterOptsSettings = {
       columns: 30,
@@ -17,6 +23,7 @@ angular.module('homeydashV3App')
       rowHeight: 60,
       margins: [10, 10],
       floating: false,
+      pushing: false,
       maxRows: 12,
       defaultSizeX: 1,
       swapping: true,
@@ -25,23 +32,60 @@ angular.module('homeydashV3App')
       resizable: {
         enabled: true,
         handles: ['sw', 'se'],
+        start: function(event, $element, widget) {
+          $element[0].addEventListener('click', preventClick, true);
+        },
+        stop: function(event, $element, widget) {
+          setTimeout(function() {
+            $element[0].removeEventListener('click', preventClick, true);
+          });
+          $scope.saveSettings();
+          console.log($rootScope.CONFIG);
+        }
       },
       draggable: {
         enabled: true,
         scrollSensitivity: 60,
         scrollSpeed: 5,
         //  handle: '.draghandle',
-        start: function(event, $element, widget) {}, //
-        drag: function(event, $element, widget) {},
-        stop: function(event, $element, widget) {
+        start: function(event, $element, widget, widgetinfo) {
+
+        },
+        drag: function(event, $element, widget, widgetinfo) {
+          $element[0].addEventListener('click', preventClick, true);
+        },
+        stop: function(event, $element, widget, widgetinfo) {
+          setTimeout(function() {
+            $element[0].removeEventListener('click', preventClick, true);
+          });
           $scope.saveSettings();
-          console.log($rootScope.CONFIG);
         }
       }
 
     };
 
+    $scope.deleteArray = [];
 
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
+      $scope.deleteArray = [];
+    });
+
+    $scope.addtodelete = function(id) {
+      if ($scope.deleteArray.indexOf(id) === -1) {
+        $scope.deleteArray.push(id);
+      } else {
+        $scope.deleteArray.splice($scope.deleteArray.indexOf(id), 1);
+      }
+      console.log($scope.deleteArray);
+    };
+
+    $scope.markedDelete = function(index) {
+      if ($scope.deleteArray.indexOf(index) === -1) {
+        return false;
+      } else {
+        return true;
+      }
+    };
     // Set localStorage
     $scope.storage = $localStorage;
 
@@ -172,7 +216,7 @@ angular.module('homeydashV3App')
 
     // Open add widget dialog
     $scope.openAddwidgetDialog = function(widgettype) {
-
+      $scope.newWidget.widgettype = widgettype;
       $mdDialog.show({
         scope: $scope,
         preserveScope: true,
@@ -239,23 +283,63 @@ angular.module('homeydashV3App')
 
     $scope.closeDialog = function() {
       $mdDialog.hide();
-      $scope.newWidget = {};
+
     };
 
     $scope.saveWidget = function(pageid) {
-      $rootScope.CONFIG.pages[pageid].widgets.push({
-        'name': escapeHtml($scope.newWidget.name),
-        'icon': $scope.newWidget.icon,
-        'widgettype': $scope.newWidget.capability.capability,
-        'capability': Object.keys($rootScope.devicelist[$scope.newWidget.device.id].capabilities),
-        'deviceid': $scope.newWidget.device.id,
-        'class': $scope.newWidget.capability.class,
-        'sizeX': $scope.newWidget.capability.width,
-        'sizeY': $scope.newWidget.capability.height
-      });
+
+
+      if ($scope.newWidget.widgettype === 'homeydevices') {
+        $rootScope.CONFIG.pages[pageid].widgets.push({
+          'name': escapeHtml($scope.newWidget.name),
+          'id': getRandomId(),
+          'icon': $scope.newWidget.icon,
+          'widgettype': $scope.newWidget.capability.capability,
+          'capability': Object.keys($rootScope.devicelist[$scope.newWidget.device.id].capabilities),
+          'deviceid': $scope.newWidget.device.id,
+          'class': $scope.newWidget.capability.class,
+          'sizeX': $scope.newWidget.capability.width,
+          'sizeY': $scope.newWidget.capability.height
+        });
+      };
+
+      if ($scope.newWidget.widgettype === 'buienradar') {
+        $rootScope.CONFIG.pages[pageid].widgets.push({
+          'name': escapeHtml($scope.newWidget.name),
+          'id': getRandomId(),
+          'widgettype': $scope.newWidget.widgettype,
+          'url': $scope.newWidget.url,
+          'sizeX': 5,
+          'sizeY': 4
+        });
+      };
+
+      if ($scope.newWidget.widgettype === 'rss') {
+        $rootScope.CONFIG.pages[pageid].widgets.push({
+          'name': escapeHtml($scope.newWidget.name),
+          'id': getRandomId(),
+          'widgettype': $scope.newWidget.widgettype,
+          'url': $scope.newWidget.url,
+          'sizeX': 9,
+          'sizeY': 4
+        });
+      };
+      if ($scope.newWidget.widgettype === 'video') {
+        $rootScope.CONFIG.pages[pageid].widgets.push({
+          'name': escapeHtml($scope.newWidget.name),
+          'id': getRandomId(),
+          'widgettype': $scope.newWidget.widgettype,
+          'url': $scope.newWidget.url,
+          'sizeX': 5,
+          'sizeY': 4
+        });
+      };
+
+
       savesettings.save($rootScope.CONFIG).then(function() {
         $scope.closeDialog();
         console.log('New settings saved!');
+        $scope.newWidget = {};
       });
     };
 
@@ -269,6 +353,71 @@ angular.module('homeydashV3App')
     }
 
 
+    //Delete widget
+    $scope.removeWidget = function(widgetid, widget, params) {
+      //var index = $rootScope.CONFIG.pages[pagename].indexOf(widgetname);
+      //console.log(widget);
+
+      //delete $rootScope.CONFIG.pages[pagename].widgets[widgetid];
+
+      // Appending dialog to document.body to cover sidenav in docs app
+      var confirm = $mdDialog.confirm()
+        .title('Delete widget')
+        .textContent('Are you sure you want to delete ' + widget.name + '?')
+        .ariaLabel('Delete widget')
+        .ok('Yes')
+        .cancel('No');
+
+      $mdDialog.show(confirm).then(function() {
+        // Delete widget
+        $rootScope.CONFIG.pages[$scope.getIdbyAtrr($rootScope.CONFIG.pages, 'pagename', params.pagename)].widgets.splice(widgetid, 1);
+        savesettings.save($rootScope.CONFIG).then(function(response) {
+          $scope.deleteArray = [];
+        }, function(error) {
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent('ERROR: ' + error)
+            .position('top right')
+          );
+        });
+      }, function() {
+        // Don't delete
+      });
+    };
+
+    // Remove selected widgets
+    $scope.removeSelectedWidgets = function(params) {
+      console.log(params);
+      // Appending dialog to document.body to cover sidenav in docs app
+      var confirm = $mdDialog.confirm()
+        .title('Delete widgets')
+        .textContent('Are you sure you want to delete the selected widgets?')
+        .ariaLabel('Delete widgets')
+        .ok('Yes')
+        .cancel('No');
+
+      $mdDialog.show(confirm).then(function() {
+        // Delete widget
+
+        angular.forEach($scope.deleteArray, function(value) {
+          $rootScope.CONFIG.pages[$scope.getIdbyAtrr($rootScope.CONFIG.pages, 'pagename', params.pagename)].widgets.splice($scope.getIdbyAtrr($rootScope.CONFIG.pages[$scope.getIdbyAtrr($rootScope.CONFIG.pages, 'pagename', params.pagename)].widgets, 'id', value), 1);
+        });
+
+        $scope.deleteArray = [];
+
+        savesettings.save($rootScope.CONFIG).then(function(response) {
+
+        }, function(error) {
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent('ERROR: ' + error)
+            .position('top right')
+          );
+        });
+      }, function() {
+        // Don't delete
+      });
+    };
 
 
   });

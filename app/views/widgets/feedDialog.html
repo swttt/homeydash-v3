@@ -1,0 +1,13 @@
+<md-dialog>
+  <md-dialog-content style="padding:20px;">
+    <h2 style="font-weight:300;text-transform:uppercase;">{{item.title}}</h2>
+    <img align="right" ng-src="{{item.enclosure.link}}" style="height:150px;width:auto;margin-left:15px;margin-bottom:15px;" />
+    <div ng-bind-html="item.content">
+
+
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="closeDialog()" class="md-primary">Close</md-button>
+  </md-dialog-actions>
+</md-dialog>
