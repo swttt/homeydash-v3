@@ -1,5 +1,10 @@
 <md-content ng-class="[localStorage.general.widgetbackground, {markedDel: markedDelete(widget.id)}]" class="md-whiteframe-1dp" layout="row" layout-wrap style="height:100%;padding:0;margin:0;overflow:hidden;">
-  <video style="height:100%;width:auto;" ng-src="{{widget.url}}" style="height:100%;width:100%;" autoplay>
+
+  <video ng-if="widget.videotype === 'html5'" style="height:100%;width:auto;" ng-src="{{widget.url}}" style="height:100%;width:100%;" autoplay>
     Your browser does not support the VIDEO tag and/or RTP streams.
   </video>
+
+  <mjpeg ng-if="widget.videotype === 'mjpeg'" base-source="{{widget.url}}"></mjpeg>
+
+
 </md-content>

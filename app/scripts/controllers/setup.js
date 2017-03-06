@@ -330,6 +330,7 @@ angular.module('homeydashV3App')
           'id': getRandomId(),
           'widgettype': $scope.newWidget.widgettype,
           'url': $scope.newWidget.url,
+          'videotype': $scope.newWidget.videotype,
           'sizeX': 5,
           'sizeY': 4
         });

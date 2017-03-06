@@ -7,7 +7,7 @@
  * # rssfeed
  */
 angular.module('homeydashV3App')
-  .directive('rssfeed', function(FeedLoader) {
+  .directive('rssfeed', function(FeedLoader, $timeout) {
     return {
       templateUrl: function(elem, attrs) {
         return attrs.template
@@ -15,12 +15,23 @@ angular.module('homeydashV3App')
       restrict: 'E',
       scope: false,
       link: function(scope, element, attrs) {
-        //element.text('this is the rssfeed directive');
-        console.log(attrs);
-        FeedLoader.fetch(scope.widget.url).then(function(res) {
-          console.log(res.data);
-          scope.feed = res.data
-        });
+        scope.$ready = true;
+
+        (function tick() {
+          if (scope.$ready === true) {
+            FeedLoader.fetch(scope.widget.url).then(function(res) {
+              console.log(res.data);
+              scope.feed = null;
+              console.log('update rss');
+              scope.feed = res.data;
+            })
+
+          }
+
+          $timeout(tick, 300000);
+        }());
+
+        ;
       }
     };
   });

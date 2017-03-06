@@ -1,4 +1,4 @@
-<md-list class=" md-dense " style="width:100%;margin:0;">
+<md-list ng-scrollbars ng-scrollbars-config="{autoHideScrollbar: false,theme: 'minimal-dark', axis: 'y'}" class=" md-dense " style="position:absolute;top:25px;bottom:0;left:0;right:0;overflow-y:auto;">
   <md-list-item ng-repeat="item in feed.items | limitTo: 5" ng-click="showFeedItem(item)">
 
     <p style="font-weight:300;text-transform:uppercase;font-size:14px;">{{item.title}}</p>

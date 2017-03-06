@@ -58,7 +58,7 @@ function fetchData() {
   var $window = initInjector.get('$window');
   var $localStorage = initInjector.get('$localStorage');
 
-  return $http.get('http://192.168.2.72/api/app/com.swttt.homeydash/config.json').then(function(response) {
+  return $http.get('http://192.168.2.72/api/app/com.swttt.homeydash/config.json', httpconfig).then(function(response) {
     var config = response.data.result;
     // Add additional services/constants/variables to your app,
     // and then finally bootstrap it:
@@ -124,11 +124,11 @@ angular
   ])
 
   // Only used for LOCAL!
-  // .run(['$http', function($http) {
-  //   $http.defaults.headers.common['Authorization'] = 'Bearer da3110b6042fae4bd73713189240fc8c797da0c7';
-  //   $http.defaults.headers.common['Content-Type'] = 'application/json';
-  //
-  // }])
+  .run(['$http', function($http) {
+    $http.defaults.headers.common['Authorization'] = 'Bearer da3110b6042fae4bd73713189240fc8c797da0c7';
+    $http.defaults.headers.common['Content-Type'] = 'application/json';
+
+  }])
 
 
   .run(function($rootScope, alldevices, CONFIG, socket, wallpaper, $http, savesettings) {

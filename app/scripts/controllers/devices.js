@@ -10,21 +10,6 @@
 angular.module('homeydashV3App')
   .controller('DevicesCtrl', function($timeout, $scope, $rootScope, $mdToast, device, alldevices, debounce, savesettings, $mdDialog) {
 
-    //Buienradar refresh
-    if ($scope.widget.url) {
-      console.log('Buienradar url found!');
-      updateBuienradar();
-
-      function updateBuienradar() {
-        $timeout(function() {
-          $scope.widget.url = $scope.widget.url + '?_lastupdate=' + new Date().getTime();
-          console.log('updated: ' + $scope.widget.name);
-          updateBuienradar();
-        }, 600000);
-      };
-    }
-
-
 
 
     $scope.showFeedItem = function(itemPass) {
@@ -48,6 +33,10 @@ angular.module('homeydashV3App')
 
     };
 
+    $scope.reloadFeed = function(url) {
+      $scope.widget.url = null;
+      //$scope.widget.url = url;
+    };
 
     // Button Control
     $scope.button = function(currentId) {

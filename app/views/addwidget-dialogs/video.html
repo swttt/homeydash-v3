@@ -29,11 +29,30 @@
 
         </wz-step>
 
-
         <wz-step style="text-align:center;" wz-title="Step 2">
+          <h3 style="font-weight:300;text-transform:uppercase; ">Select video source format</h3>
+
+
+          <md-select ng-model="newWidget.videotype" style="width:50%;margin:0 auto;margin-bottom:30px;">
+            <md-option value="mjpeg">mjpeg</md-option>
+            <md-option value="html5">mp4, ogg or webm</md-option>
+          </md-select>
+          <!-- <md-button class="md-raised md-primary " ng-click="newWidget.capability = null;" ui-sref="setup.pages.addwidget({
+              pagename: params.pagename
+            })"> Back </md-button> -->
+          <div style="width:100%;text-align:center;">
+            <md-button class="md-raised md-warn " ng-click="closeDialog()"> Cancel </md-button>
+            <md-button ng-disabled="!newWidget.videotype" class="md-raised md-primary " wz-next> Next </md-button>
+          </div>
+
+
+        </wz-step>
+
+
+        <wz-step style="text-align:center;" wz-title="Step 3">
           <h3 style="font-weight:300;text-transform:uppercase; ">Provide video url</h3>
 
-          <p>Current only html5 video is supported. This is different per browser, just give your stream a shot and see if it works :) </p>
+
           <md-input-container style="text-align:left;">
             <label>Video url</label>
             <input name="url" ng-model="newWidget.url">
