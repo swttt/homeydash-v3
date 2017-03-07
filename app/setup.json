@@ -94,8 +94,16 @@
     "speaker.svg",
     "candles.svg",
     "movie.svg",
-    "movie2.svg"
-
+    "movie2.svg",
+    "power_button.svg",
+    "sleep4.svg",
+    "lamp1.svg",
+    "switch.svg",
+    "light2.svg",
+    "robot.svg",
+    "home.svg",
+    "vacuum_cleaner.svg",
+    "volume_off.svg"
   ],
   "themes": [
     "red",
